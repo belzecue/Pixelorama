@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hsplit.png-cff421f387a40a015e4864c4aad31efb.stex"
+path="res://.import/jessmpz.png-dbccabb1c0fbf170a36de90e7a060bb2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/themes/light/icons/hsplit.png"
-dest_files=[ "res://.import/hsplit.png-cff421f387a40a015e4864c4aad31efb.stex" ]
+source_file="res://assets/graphics/splash_screen/artworks/jessmpz.png"
+dest_files=[ "res://.import/jessmpz.png-dbccabb1c0fbf170a36de90e7a060bb2.stex" ]
 
 [params]
 

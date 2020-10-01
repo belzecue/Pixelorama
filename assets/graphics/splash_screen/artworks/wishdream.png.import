@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grabber_hover.png-50ed6eb83ae0f5e6818d3317f3ea7425.stex"
+path="res://.import/wishdream.png-2d4b51ec077caa274db44eee48928c59.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/themes/light/icons/grabber_hover.png"
-dest_files=[ "res://.import/grabber_hover.png-50ed6eb83ae0f5e6818d3317f3ea7425.stex" ]
+source_file="res://assets/graphics/splash_screen/artworks/wishdream.png"
+dest_files=[ "res://.import/wishdream.png-2d4b51ec077caa274db44eee48928c59.stex" ]
 
 [params]
 
