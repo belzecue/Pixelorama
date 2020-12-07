@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-11-23 16:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -114,6 +114,9 @@ msgstr "Rehacer"
 msgid "Copy"
 msgstr "Copiar"
 
+msgid "Cut"
+msgstr ""
+
 msgid "Paste"
 msgstr "Pegar"
 
@@ -150,6 +153,9 @@ msgstr "Preferencias"
 msgid "Tile Mode"
 msgstr "Modo mosaico"
 
+msgid "Mirror View"
+msgstr ""
+
 msgid "Show Grid"
 msgstr "Mostrar cuadrícula"
 
@@ -182,6 +188,9 @@ msgstr "Opciones de importación"
 
 msgid "Import as:"
 msgstr "Importar como:"
+
+msgid "Recent projects"
+msgstr ""
 
 msgid "New tab"
 msgstr "Nueva pestaña"
@@ -359,6 +368,9 @@ msgstr "Inicio"
 msgid "Language"
 msgstr "Idioma"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Temas"
 
@@ -404,6 +416,9 @@ msgstr "Color de guía:"
 msgid "System Language"
 msgstr "Idioma del sistema"
 
+msgid "Display Scale"
+msgstr ""
+
 msgid "Dark"
 msgstr "Oscuro"
 
@@ -418,6 +433,9 @@ msgstr "Caramel"
 
 msgid "Light"
 msgstr "Claro"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr "Sólo afecta a la selección"
@@ -470,14 +488,14 @@ msgstr "Tipo:"
 msgid "Angle:"
 msgstr "Ángulo:"
 
-msgid "Hue"
-msgstr "Matiz"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Saturación"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Valor"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Aplicar"
@@ -922,6 +940,12 @@ msgstr "Patrón"
 msgid "Offset"
 msgstr "Desplazamiento"
 
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
 msgid "Lighten"
 msgstr "Aclarar"
 
@@ -1097,6 +1121,12 @@ msgstr "Vincular celda"
 msgid "Unlink Cel"
 msgstr "Desvincular celda"
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Capa"
 
@@ -1123,6 +1153,9 @@ msgstr "Combinar la capa actual con la de abajo"
 
 msgid "Opacity:"
 msgstr "Opacidad:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Alternar visibilidad de capa(s)"
@@ -1231,6 +1264,12 @@ msgstr "Deshacer: Eliminar etiqueta de fotograma"
 msgid "Redo: Delete Frame Tag"
 msgstr "Rehacer: Eliminar la etiqueta del fotograma"
 
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
+
 msgid "Move Guide"
 msgstr "Mover Guía"
 
@@ -1240,11 +1279,11 @@ msgstr "Archivo guardado"
 msgid "File autosaved"
 msgstr "Archivo guardado automáticamente"
 
-msgid "File failed to open"
-msgstr "Error al abrir el archivo"
+msgid "File failed to open. Error code %s"
+msgstr ""
 
-msgid "File failed to save"
-msgstr "Error al guardar"
+msgid "File failed to save. Error code %s"
+msgstr ""
 
 msgid "File exported"
 msgstr "Archivo exportado"
@@ -1281,6 +1320,15 @@ msgstr "Archivo de paleta no válido!"
 
 msgid "Edit Palette"
 msgstr "Editar Paleta"
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
+msgstr ""
 
 msgid "Patrons:"
 msgstr "Patrons:"
@@ -1387,6 +1435,9 @@ msgstr "Una herramienta asignada al botón derecho del ratón"
 msgid "Cannot find last project file."
 msgstr "No se pudo encontrar el último archivo de proyecto."
 
+msgid "Cannot find project file."
+msgstr ""
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "¡No has guardado o abierto ningún proyecto en Pixelorama aún!"
 
@@ -1434,6 +1485,9 @@ msgstr "Copia de seguridad cargada"
 msgid "Remove currently selected palette"
 msgstr "Eliminar la paleta seleccionada"
 
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr ""
+
 msgid "You can't remove more palettes!"
 msgstr "¡No puedes eliminar más paletas!"
 
@@ -1445,4 +1499,22 @@ msgstr "¡Se ha producido un error al eliminar la paleta! Código de error: %s"
 
 msgid "and"
 msgstr "y"
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
+msgstr ""
 

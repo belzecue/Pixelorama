@@ -16,10 +16,6 @@ onready var preview_rect : TextureRect = $VBoxContainer/Preview
 
 
 func _on_ResizeCanvas_about_to_show() -> void:
-	if first_time:
-		width_spinbox.value = Global.current_project.size.x
-		height_spinbox.value = Global.current_project.size.y
-
 	image = Image.new()
 	image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 	image.lock()
@@ -39,6 +35,9 @@ func _on_ResizeCanvas_about_to_show() -> void:
 		layer_i += 1
 	image.unlock()
 
+	if first_time:
+		width_spinbox.value = Global.current_project.size.x
+		height_spinbox.value = Global.current_project.size.y
 	update_preview()
 
 

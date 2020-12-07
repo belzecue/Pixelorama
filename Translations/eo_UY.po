@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2020-09-23 12:30\n"
+"PO-Revision-Date: 2020-11-23 16:59\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -114,6 +114,9 @@ msgstr "Refari"
 msgid "Copy"
 msgstr ""
 
+msgid "Cut"
+msgstr ""
+
 msgid "Paste"
 msgstr ""
 
@@ -150,6 +153,9 @@ msgstr "Agordoj"
 msgid "Tile Mode"
 msgstr "Kahela reĝimo"
 
+msgid "Mirror View"
+msgstr ""
+
 msgid "Show Grid"
 msgstr "Montri kradreton"
 
@@ -181,6 +187,9 @@ msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
+msgstr ""
+
+msgid "Recent projects"
 msgstr ""
 
 msgid "New tab"
@@ -359,6 +368,9 @@ msgstr ""
 msgid "Language"
 msgstr "Lingvo"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Temoj"
 
@@ -404,6 +416,9 @@ msgstr "Koloro de direktlinioj:"
 msgid "System Language"
 msgstr "Sistema lingvo"
 
+msgid "Display Scale"
+msgstr ""
+
 msgid "Dark"
 msgstr "Malhela"
 
@@ -418,6 +433,9 @@ msgstr "Karamela"
 
 msgid "Light"
 msgstr "Hela"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr ""
@@ -470,14 +488,14 @@ msgstr "Tipo:"
 msgid "Angle:"
 msgstr "Angulo:"
 
-msgid "Hue"
-msgstr "Nuanco"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Satureco"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Valoro"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Apliki"
@@ -903,6 +921,12 @@ msgstr "Ŝablono"
 msgid "Offset"
 msgstr ""
 
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
 msgid "Lighten"
 msgstr ""
 
@@ -1070,6 +1094,12 @@ msgstr ""
 msgid "Unlink Cel"
 msgstr ""
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Tavolo"
 
@@ -1096,6 +1126,9 @@ msgstr ""
 
 msgid "Opacity:"
 msgstr "Opakeco:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr ""
@@ -1203,6 +1236,12 @@ msgstr ""
 msgid "Redo: Delete Frame Tag"
 msgstr ""
 
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
+
 msgid "Move Guide"
 msgstr "Movi direktlinion"
 
@@ -1212,11 +1251,11 @@ msgstr "Dosiero konservitas"
 msgid "File autosaved"
 msgstr ""
 
-msgid "File failed to open"
-msgstr "Dosiero ne sukcesis malfermiĝi"
+msgid "File failed to open. Error code %s"
+msgstr ""
 
-msgid "File failed to save"
-msgstr "Dosiero ne sukcesis konservi"
+msgid "File failed to save. Error code %s"
+msgstr ""
 
 msgid "File exported"
 msgstr "Dosiero elportitas"
@@ -1253,6 +1292,15 @@ msgstr "Malvera dosiero de paletro!"
 
 msgid "Edit Palette"
 msgstr "Redakti paletron"
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
+msgstr ""
 
 msgid "Patrons:"
 msgstr "Patronoj:"
@@ -1359,6 +1407,9 @@ msgstr "Ilo, asignita al la musa dekstra butono"
 msgid "Cannot find last project file."
 msgstr "Ne povas trovi dosieron de la lasta projekto."
 
+msgid "Cannot find project file."
+msgstr ""
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Vi ankoraŭ ne konservis aŭ malfermis iun ajn projekton en Pixelorama!"
 
@@ -1405,6 +1456,9 @@ msgstr ""
 msgid "Remove currently selected palette"
 msgstr ""
 
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr ""
+
 msgid "You can't remove more palettes!"
 msgstr "Vi ne povas forigi pli da paletroj!"
 
@@ -1415,5 +1469,23 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Eraro okazis dum la paletra forigado! Kodo de eraro: %s"
 
 msgid "and"
+msgstr ""
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
 msgstr ""
 

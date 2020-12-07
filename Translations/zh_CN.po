@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-11-24 00:45\n"
 
 msgid "OK"
 msgstr "确定"
@@ -114,6 +114,9 @@ msgstr "重做"
 msgid "Copy"
 msgstr "复制"
 
+msgid "Cut"
+msgstr "剪切"
+
 msgid "Paste"
 msgstr "粘贴"
 
@@ -150,6 +153,9 @@ msgstr "首选项"
 msgid "Tile Mode"
 msgstr "平铺模式"
 
+msgid "Mirror View"
+msgstr "镜像视图"
+
 msgid "Show Grid"
 msgstr "显示网格"
 
@@ -157,7 +163,7 @@ msgid "Show Rulers"
 msgstr "显示标尺"
 
 msgid "Show Guides"
-msgstr "显示指南"
+msgstr "显示参考线"
 
 msgid "Show Animation Timeline"
 msgstr "显示动画时间轴"
@@ -182,6 +188,9 @@ msgstr "导入选项"
 
 msgid "Import as:"
 msgstr "导入为："
+
+msgid "Recent projects"
+msgstr "最近项目"
 
 msgid "New tab"
 msgstr "新建选项卡"
@@ -336,10 +345,10 @@ msgid "File:"
 msgstr "文件:"
 
 msgid "Interpolation:"
-msgstr "插补:"
+msgstr "插值："
 
 msgid "Nearest"
-msgstr "最近"
+msgstr "最临近"
 
 msgid "Bilinear"
 msgstr "双线性"
@@ -358,6 +367,9 @@ msgstr "启动"
 
 msgid "Language"
 msgstr "语言"
+
+msgid "Interface"
+msgstr "界面"
 
 msgid "Themes"
 msgstr "主题"
@@ -404,6 +416,9 @@ msgstr "辅助线颜色:"
 msgid "System Language"
 msgstr "系统语言"
 
+msgid "Display Scale"
+msgstr "显示缩放"
+
 msgid "Dark"
 msgstr "深色"
 
@@ -418,6 +433,9 @@ msgstr "浅褐色"
 
 msgid "Light"
 msgstr "白色"
+
+msgid "Purple"
+msgstr "紫色"
 
 msgid "Only affect selection"
 msgstr "仅影响所选"
@@ -470,14 +488,14 @@ msgstr "类型："
 msgid "Angle:"
 msgstr "角度："
 
-msgid "Hue"
-msgstr "色相"
+msgid "Hue:"
+msgstr "色相："
 
-msgid "Saturation"
-msgstr "饱和度"
+msgid "Saturation:"
+msgstr "饱和度："
 
-msgid "Value"
-msgstr "值"
+msgid "Value:"
+msgstr "值："
 
 msgid "Apply"
 msgstr "应用"
@@ -531,10 +549,10 @@ msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "版权所有 2019-2020 Orama Interactive 和贡献者"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 by Orama Interactive 和贡献者"
 
 msgid "Website"
 msgstr "网站"
@@ -776,7 +794,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "在画布上的光标旁边显示所选右侧工具的图标"
 
 msgid "Guides"
-msgstr "手册"
+msgstr "参考线"
 
 msgid "Guides color:"
 msgstr "参考线颜色："
@@ -890,7 +908,7 @@ msgid "Overwrites color instead of blending it. This option is only relevant wit
 msgstr "覆盖颜色而不是混合颜色。 此选项仅与不完全不透明的颜色有关"
 
 msgid "Pixel Perfect"
-msgstr "完美像素"
+msgstr "平滑像素"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "通过去除边缘上多余的像素使线条平滑"
@@ -921,6 +939,12 @@ msgstr "模式"
 
 msgid "Offset"
 msgstr "偏移"
+
+msgid "Simple Shading"
+msgstr "简单阴影"
+
+msgid "Hue Shifting"
+msgstr "色调偏移"
 
 msgid "Lighten"
 msgstr "减淡"
@@ -1097,6 +1121,12 @@ msgstr "取消链接单元"
 msgid "Unlink Cel"
 msgstr "取消链接单元"
 
+msgid "Frame Properties"
+msgstr "帧属性"
+
+msgid "Frame properties"
+msgstr "帧属性"
+
 msgid "Layer"
 msgstr "图层"
 
@@ -1123,6 +1153,9 @@ msgstr "当前图层与下面图层合并"
 
 msgid "Opacity:"
 msgstr "不透明度:"
+
+msgid "Tile mode opacity:"
+msgstr "平铺模式不透明度："
 
 msgid "Toggle layer's visibility"
 msgstr "切换图层可见性"
@@ -1231,6 +1264,12 @@ msgstr "撤销：删除帧标签"
 msgid "Redo: Delete Frame Tag"
 msgstr "重做：删除帧标签"
 
+msgid "Undo: Change frame duration"
+msgstr "撤消：更改帧持续时间"
+
+msgid "Redo: Change frame duration"
+msgstr "重做：更改帧持续时间"
+
 msgid "Move Guide"
 msgstr "移除辅助线"
 
@@ -1240,11 +1279,11 @@ msgstr "文件已保存"
 msgid "File autosaved"
 msgstr "文件已自动保存"
 
-msgid "File failed to open"
-msgstr "文件打开失败"
+msgid "File failed to open. Error code %s"
+msgstr "打开文件失败。错误代码 %s"
 
-msgid "File failed to save"
-msgstr "文件保存失败"
+msgid "File failed to save. Error code %s"
+msgstr "保存文件失败。错误代码 %s"
 
 msgid "File exported"
 msgstr "文件已导出"
@@ -1281,6 +1320,15 @@ msgstr "无效的调色板文件!"
 
 msgid "Edit Palette"
 msgstr "编辑调色板"
+
+msgid "Create colors with alpha component"
+msgstr "创建带有 Alpha 组件的颜色"
+
+msgid "Get colors only from selection"
+msgstr "仅从所选获取颜色"
+
+msgid "Get colors from"
+msgstr "获取颜色从"
 
 msgid "Patrons:"
 msgstr "赞助:"
@@ -1387,6 +1435,9 @@ msgstr "分配给鼠标右键的工具"
 msgid "Cannot find last project file."
 msgstr "无法找到最后一个项目文件。"
 
+msgid "Cannot find project file."
+msgstr "无法找到项目文件。"
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "您尚未在 Pixelorama 中保存或打开任何项目！"
 
@@ -1433,6 +1484,9 @@ msgstr "重新加载备份"
 msgid "Remove currently selected palette"
 msgstr "删除当前所选调色板"
 
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr "您确定要删除该调色板吗 (无法撤消)？"
+
 msgid "You can't remove more palettes!"
 msgstr "您无法删除更多调色板！"
 
@@ -1444,4 +1498,22 @@ msgstr "删除调色板时发生错误！ 错误代码：%s"
 
 msgid "and"
 msgstr "和"
+
+msgid "Move the selected frame to the left."
+msgstr "移动所选帧到左侧。"
+
+msgid "Move the selected frame to the right."
+msgstr "移动所选帧到右侧。"
+
+msgid "Frame duration"
+msgstr "帧持续时间"
+
+msgid "Tiled In Both Axis"
+msgstr "在两个轴上平移"
+
+msgid "Tiled In X Axis"
+msgstr "在 X 轴上平移"
+
+msgid "Tiled In Y Axis"
+msgstr "在 Y 轴上平移"
 

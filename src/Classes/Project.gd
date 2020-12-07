@@ -5,9 +5,11 @@ class_name Project extends Reference
 var name := "" setget name_changed
 var size : Vector2 setget size_changed
 var undo_redo : UndoRedo
+var tile_mode : int = Global.Tile_Mode.NONE
 var undos := 0 # The number of times we added undo properties
 var has_changed := false setget has_changed_changed
 var frames := [] setget frames_changed # Array of Frames (that contain Cels)
+var frame_duration := []
 var layers := [] setget layers_changed # Array of Layers
 var current_frame := 0 setget frame_changed
 var current_layer := 0 setget layer_changed
@@ -32,12 +34,14 @@ var cameras_offset := [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO] # Array of Vect
 var directory_path := ""
 var file_name := "untitled"
 var file_format : int = Export.FileFormat.PNG
+var was_exported := false
 
 
 func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> void:
 	frames = _frames
 	name = _name
 	size = _size
+	frame_duration.append(1)
 	select_all_pixels()
 
 	undo_redo = UndoRedo.new()
@@ -136,6 +140,8 @@ func change_project() -> void:
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
+	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
+	Global.disable_button(Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1)
 	toggle_layer_buttons_layers()
 	toggle_layer_buttons_current_layer()
 
@@ -186,18 +192,26 @@ func change_project() -> void:
 	if save_path != "":
 		Global.open_sprites_dialog.current_path = save_path
 		Global.save_sprites_dialog.current_path = save_path
-		Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % save_path.get_file())
+		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % save_path.get_file())
 	else:
-		Global.file_menu.get_popup().set_item_text(3, tr("Save"))
+		Global.file_menu.get_popup().set_item_text(4, tr("Save"))
 
 	Export.directory_path = directory_path
 	Export.file_name = file_name
 	Export.file_format = file_format
+	Export.was_exported = was_exported
 
-	if directory_path.empty():
-		Global.file_menu.get_popup().set_item_text(5, tr("Export"))
+	if !was_exported:
+		Global.file_menu.get_popup().set_item_text(6, tr("Export"))
 	else:
-		Global.file_menu.get_popup().set_item_text(5, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
+		Global.file_menu.get_popup().set_item_text(6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
+
+	for j in range(len(Global.Tile_Mode)):
+		if j != tile_mode:
+			Global.tile_mode_submenu.set_item_checked(j, false)
+		else:
+			Global.tile_mode_submenu.set_item_checked(j, true)
+
 
 
 func serialize() -> Dictionary:
@@ -269,6 +283,7 @@ func serialize() -> Dictionary:
 		"export_directory_path" : directory_path,
 		"export_file_name" : file_name,
 		"export_file_format" : file_format,
+		"frame_duration" : frame_duration,
 	}
 
 	return project_data
@@ -315,8 +330,8 @@ func deserialize(dict : Dictionary) -> void:
 				guide.add_point(Vector2(g.pos, -99999))
 				guide.add_point(Vector2(g.pos, 99999))
 			guide.has_focus = false
+			guide.project = self
 			Global.canvas.add_child(guide)
-			guides.append(guide)
 	if dict.has("symmetry_points"):
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]
@@ -330,6 +345,13 @@ func deserialize(dict : Dictionary) -> void:
 		file_name = dict.export_file_name
 	if dict.has("export_file_format"):
 		file_format = dict.export_file_format
+	if dict.has("frame_duration"):
+		frame_duration = dict.frame_duration
+	else:
+		for i in frames.size():
+			if i < frame_duration.size():
+				continue
+			frame_duration.append(1)
 
 
 func name_changed(value : String) -> void:
@@ -436,6 +458,8 @@ func frame_changed(value : int) -> void:
 		layers[current_layer].frame_container.get_child(current_frame).pressed = true
 
 	Global.disable_button(Global.remove_frame_button, frames.size() == 1)
+	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
+	Global.disable_button(Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1)
 
 	Global.canvas.update()
 	Global.transparent_checker._ready() # To update the rect size

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-11-23 16:58\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -114,6 +114,9 @@ msgstr "Refer"
 msgid "Copy"
 msgstr "Copiar"
 
+msgid "Cut"
+msgstr ""
+
 msgid "Paste"
 msgstr "Enganxar"
 
@@ -150,6 +153,9 @@ msgstr "Preferències"
 msgid "Tile Mode"
 msgstr "Mode Tile"
 
+msgid "Mirror View"
+msgstr ""
+
 msgid "Show Grid"
 msgstr "Mostrar la quadrícula"
 
@@ -182,6 +188,9 @@ msgstr "Opcions d'importació"
 
 msgid "Import as:"
 msgstr "Importar com a:"
+
+msgid "Recent projects"
+msgstr ""
 
 msgid "New tab"
 msgstr "Pestanya nova"
@@ -359,6 +368,9 @@ msgstr ""
 msgid "Language"
 msgstr "Llenguatge"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Temes"
 
@@ -404,6 +416,9 @@ msgstr "Color de la guia:"
 msgid "System Language"
 msgstr "Idioma del sistema"
 
+msgid "Display Scale"
+msgstr ""
+
 msgid "Dark"
 msgstr "Fosc"
 
@@ -418,6 +433,9 @@ msgstr "Caramel"
 
 msgid "Light"
 msgstr "Llum"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr ""
@@ -470,14 +488,14 @@ msgstr "Tipus:"
 msgid "Angle:"
 msgstr "Angle:"
 
-msgid "Hue"
-msgstr "Tonalitat"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Saturació"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Valor"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Aplicar"
@@ -917,6 +935,12 @@ msgstr "Patró"
 msgid "Offset"
 msgstr "Desfasament"
 
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
 msgid "Lighten"
 msgstr ""
 
@@ -1089,6 +1113,12 @@ msgstr "Vincular Cel·la"
 msgid "Unlink Cel"
 msgstr "Desvincular Cel·la"
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Capa"
 
@@ -1115,6 +1145,9 @@ msgstr ""
 
 msgid "Opacity:"
 msgstr "Opacitat:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Activa/desactiva la visibilitat de la capa"
@@ -1222,6 +1255,12 @@ msgstr ""
 msgid "Redo: Delete Frame Tag"
 msgstr ""
 
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
+
 msgid "Move Guide"
 msgstr ""
 
@@ -1231,10 +1270,10 @@ msgstr "Fitxer desat"
 msgid "File autosaved"
 msgstr "Fitxer desat automaticament"
 
-msgid "File failed to open"
-msgstr "El fitxer ha fallat a l'obrir-se"
+msgid "File failed to open. Error code %s"
+msgstr ""
 
-msgid "File failed to save"
+msgid "File failed to save. Error code %s"
 msgstr ""
 
 msgid "File exported"
@@ -1272,6 +1311,15 @@ msgstr ""
 
 msgid "Edit Palette"
 msgstr "Editar Paleta"
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
+msgstr ""
 
 msgid "Patrons:"
 msgstr "Patróns:"
@@ -1378,6 +1426,9 @@ msgstr ""
 msgid "Cannot find last project file."
 msgstr "No es pot trobar el fitxer del projecte més recent."
 
+msgid "Cannot find project file."
+msgstr ""
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr ""
 
@@ -1424,6 +1475,9 @@ msgstr ""
 msgid "Remove currently selected palette"
 msgstr ""
 
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr ""
+
 msgid "You can't remove more palettes!"
 msgstr "No es pot eliminar més paletes!"
 
@@ -1434,5 +1488,23 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr "Ha hagut un error quan es va intentar eliminar la paleta! Codi de error: %s"
 
 msgid "and"
+msgstr ""
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
 msgstr ""
 

@@ -53,7 +53,9 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		err = file.open(path, File.READ) # If the file is not compressed open it raw (pre-v0.7)
 
 	if err != OK:
-		Global.notification_label("File failed to open")
+		Global.error_dialog.set_text(tr("File failed to open. Error code %s") % err)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
 		file.close()
 		return
 
@@ -114,9 +116,13 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		Global.config_cache.save("user://cache.ini")
 		Export.file_name = path.get_file().trim_suffix(".pxo")
 		Export.directory_path = path.get_base_dir()
+		new_project.directory_path = Export.directory_path
+		new_project.file_name = Export.file_name
 		Export.was_exported = false
-		Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
-		Global.file_menu.get_popup().set_item_text(5, tr("Export"))
+		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % path.get_file())
+		Global.file_menu.get_popup().set_item_text(6, tr("Export"))
+
+	Global.save_project_to_recent_list(path)
 
 
 # For pxo files older than v0.8
@@ -212,6 +218,8 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 
 		new_project.size = Vector2(width, height)
 		new_project.frames.append(frame_class)
+		if frame >= new_project.frame_duration.size():
+			new_project.frame_duration.append(1)
 		frame_line = file.get_line()
 		frame += 1
 
@@ -265,6 +273,19 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 
 
 func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true, project : Project = Global.current_project) -> void:
+	var serialized_data = project.serialize()
+	if !serialized_data:
+		Global.error_dialog.set_text(tr("File failed to save. Converting project data to dictionary failed."))
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+		return
+	var to_save = JSON.print(serialized_data)
+	if !to_save:
+		Global.error_dialog.set_text(tr("File failed to save. Converting dictionary to JSON failed."))
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+		return
+
 	var file : File = File.new()
 	var err
 	if use_zstd_compression:
@@ -272,53 +293,57 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 	else:
 		err = file.open(path, File.WRITE)
 
-	if err == OK:
-		if !autosave:
-			project.name = path.get_file()
-			current_save_paths[Global.current_project_index] = path
-
-		var to_save = JSON.print(project.serialize())
-		file.store_line(to_save)
-		for frame in project.frames:
-			for cel in frame.cels:
-				file.store_buffer(cel.image.get_data())
-
-		for brush in project.brushes:
-			file.store_buffer(brush.get_data())
-
+	if err != OK:
+		Global.error_dialog.set_text(tr("File failed to save. Error code %s") % err)
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
 		file.close()
+		return
 
-		if OS.get_name() == "HTML5" and !autosave:
-			err = file.open(path, File.READ)
-			if !err:
-				var file_data = Array(file.get_buffer(file.get_len()))
-				JavaScript.eval("download('%s', %s, '');" % [path.get_file(), str(file_data)], true)
-			file.close()
-			# Remove the .pxo file from memory, as we don't need it anymore
-			var dir = Directory.new()
-			dir.remove(path)
+	if !autosave:
+		project.name = path.get_file()
+		current_save_paths[Global.current_project_index] = path
 
-		if autosave:
-			Global.notification_label("File autosaved")
-		else:
-			# First remove backup then set current save path
-			if project.has_changed:
-				project.has_changed = false
-			remove_backup(Global.current_project_index)
-			Global.notification_label("File saved")
-			Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
+	file.store_line(to_save)
+	for frame in project.frames:
+		for cel in frame.cels:
+			file.store_buffer(cel.image.get_data())
 
-			# Set last opened project path and save
-			Global.config_cache.set_value("preferences", "last_project_path", path)
-			Global.config_cache.save("user://cache.ini")
-			Export.file_name = path.get_file().trim_suffix(".pxo")
-			Export.directory_path = path.get_base_dir()
-			Export.was_exported = false
-			Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % path.get_file())
+	for brush in project.brushes:
+		file.store_buffer(brush.get_data())
 
+	file.close()
+
+	if OS.get_name() == "HTML5" and !autosave:
+		err = file.open(path, File.READ)
+		if !err:
+			var file_data = Array(file.get_buffer(file.get_len()))
+			JavaScript.eval("download('%s', %s, '');" % [path.get_file(), str(file_data)], true)
+		file.close()
+		# Remove the .pxo file from memory, as we don't need it anymore
+		var dir = Directory.new()
+		dir.remove(path)
+
+	if autosave:
+		Global.notification_label("File autosaved")
 	else:
-		Global.notification_label("File failed to save")
-		file.close()
+		# First remove backup then set current save path
+		if project.has_changed:
+			project.has_changed = false
+		remove_backup(Global.current_project_index)
+		Global.notification_label("File saved")
+		Global.window_title = path.get_file() + " - Pixelorama " + Global.current_version
+
+		# Set last opened project path and save
+		Global.config_cache.set_value("preferences", "last_project_path", path)
+		Global.config_cache.save("user://cache.ini")
+		Export.file_name = path.get_file().trim_suffix(".pxo")
+		Export.directory_path = path.get_base_dir()
+		Export.was_exported = false
+		project.was_exported = false
+		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % path.get_file())
+
+	Global.save_project_to_recent_list(path)
 
 
 func open_image_as_new_tab(path : String, image : Image) -> void:
@@ -446,6 +471,8 @@ func set_new_tab(project : Project, path : String) -> void:
 		Global.window_title = Global.window_title + "(*)"
 	var file_name := path.get_basename().get_file()
 	var directory_path := path.get_basename().replace(file_name, "")
+	project.directory_path = directory_path
+	project.file_name = file_name
 	Export.directory_path = directory_path
 	Export.file_name = file_name
 

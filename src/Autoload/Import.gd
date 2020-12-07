@@ -68,7 +68,7 @@ func get_brush_files_from_directory(directory: String): # -> Array
 			# and png one at that nya
 			if !the_directory.current_is_dir() and curr_file.get_extension().to_lower() == "png":
 				# if we are a random element, add
-				if "%" in curr_file:
+				if "~" in curr_file:
 					randomised_files.append(curr_file)
 				else:
 					non_randomised_files.append(curr_file)
@@ -258,6 +258,8 @@ func import_gpl(path : String, text : String) -> Palette:
 		elif line_number > 0 && line.length() >= 9:
 			line = line.replace("\t", " ")
 			var color_data : PoolStringArray = line.split(" ", false, 4)
+			if color_data.size() < 3:
+				continue
 			var red : float = color_data[0].to_float() / 255.0
 			var green : float = color_data[1].to_float() / 255.0
 			var blue : float = color_data[2].to_float() / 255.0

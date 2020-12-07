@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-11-24 08:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -114,6 +114,9 @@ msgstr "Wiederherstellen"
 msgid "Copy"
 msgstr "Kopieren"
 
+msgid "Cut"
+msgstr "Ausschneiden"
+
 msgid "Paste"
 msgstr "Einfügen"
 
@@ -148,7 +151,10 @@ msgid "Preferences"
 msgstr "Einstellungen"
 
 msgid "Tile Mode"
-msgstr "Tile Modus"
+msgstr "Tilemodus"
+
+msgid "Mirror View"
+msgstr "Spiegel-Ansicht"
 
 msgid "Show Grid"
 msgstr "Zeige Raster"
@@ -182,6 +188,9 @@ msgstr "Importoptionen"
 
 msgid "Import as:"
 msgstr "Importiere als:"
+
+msgid "Recent projects"
+msgstr "Letzte Projekte"
 
 msgid "New tab"
 msgstr "Neuer Tab"
@@ -358,6 +367,9 @@ msgstr "Start"
 msgid "Language"
 msgstr "Sprache"
 
+msgid "Interface"
+msgstr "Benutzeroberfläche"
+
 msgid "Themes"
 msgstr "Designs"
 
@@ -403,6 +415,9 @@ msgstr "Guidefarbe"
 msgid "System Language"
 msgstr "Systemsprache"
 
+msgid "Display Scale"
+msgstr "Bildschirmgröße"
+
 msgid "Dark"
 msgstr "Dunkel"
 
@@ -417,6 +432,9 @@ msgstr "Karamell"
 
 msgid "Light"
 msgstr "Hell"
+
+msgid "Purple"
+msgstr "Violett"
 
 msgid "Only affect selection"
 msgstr "Nur Auswahl beeinflussen"
@@ -469,14 +487,14 @@ msgstr "Typ:"
 msgid "Angle:"
 msgstr "Winkel:"
 
-msgid "Hue"
-msgstr "Farbton"
+msgid "Hue:"
+msgstr "Farbton:"
 
-msgid "Saturation"
-msgstr "Sättigung"
+msgid "Saturation:"
+msgstr "Sättigung:"
 
-msgid "Value"
-msgstr "Wert"
+msgid "Value:"
+msgstr "Wert:"
 
 msgid "Apply"
 msgstr "Übernehmen"
@@ -530,10 +548,10 @@ msgid "Developed by Orama Interactive"
 msgstr "Entwickelt von Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Copyright 2019-2020 Orama Interactive und Mitwirkende"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©Copyright 2019-2020 von Orama Interactive und Mitwirkende"
 
 msgid "Website"
 msgstr "Website"
@@ -921,6 +939,12 @@ msgstr "Muster"
 msgid "Offset"
 msgstr "Offset"
 
+msgid "Simple Shading"
+msgstr "Simples Shading"
+
+msgid "Hue Shifting"
+msgstr "Farbtonverschiebung"
+
 msgid "Lighten"
 msgstr "Erhellen"
 
@@ -1096,6 +1120,12 @@ msgstr "Cel verlinken"
 msgid "Unlink Cel"
 msgstr "Cel entkoppeln"
 
+msgid "Frame Properties"
+msgstr "Frame-Eigenschaften"
+
+msgid "Frame properties"
+msgstr "Frame-Eigenschaften"
+
 msgid "Layer"
 msgstr "Ebene"
 
@@ -1122,6 +1152,9 @@ msgstr "Führe aktuelle Ebene mit der darunter zusammen"
 
 msgid "Opacity:"
 msgstr "Deckkraft"
+
+msgid "Tile mode opacity:"
+msgstr "Tilemodus Deckkraft:"
 
 msgid "Toggle layer's visibility"
 msgstr "Ändere die Sichtbarkeit der Ebene"
@@ -1230,6 +1263,12 @@ msgstr "Rückgängig: Lösche Frame Tag"
 msgid "Redo: Delete Frame Tag"
 msgstr "Wiederholen: Lösche Frame Tag"
 
+msgid "Undo: Change frame duration"
+msgstr "Rückgängig: Frame-Dauer ändern"
+
+msgid "Redo: Change frame duration"
+msgstr "Wiederholen: Frame-Dauer ändern"
+
 msgid "Move Guide"
 msgstr "Bewegungsanleitung"
 
@@ -1239,11 +1278,11 @@ msgstr "Datei gespeichert"
 msgid "File autosaved"
 msgstr "Datei automatisch gespeichert"
 
-msgid "File failed to open"
-msgstr "Datei konnte nicht geöffnet werden"
+msgid "File failed to open. Error code %s"
+msgstr "Datei konnte nicht geöffnet werden. Fehlercode %s"
 
-msgid "File failed to save"
-msgstr "Datei konnte nicht gespeichert werden"
+msgid "File failed to save. Error code %s"
+msgstr "Datei konnte nicht gespeichert werden. Fehlercode %s"
 
 msgid "File exported"
 msgstr "Datei exportiert"
@@ -1280,6 +1319,15 @@ msgstr "Nicht gültige Palettendatei!"
 
 msgid "Edit Palette"
 msgstr "Bearbeite Palette"
+
+msgid "Create colors with alpha component"
+msgstr "Erstelle Farben mit Alpha-Komponente"
+
+msgid "Get colors only from selection"
+msgstr "Farben nur aus Auswahl holen"
+
+msgid "Get colors from"
+msgstr "Farben holen von"
 
 msgid "Patrons:"
 msgstr "Patrons:"
@@ -1386,6 +1434,9 @@ msgstr "Ein Werkzeug, das der rechten Maustaste zugewiesen ist"
 msgid "Cannot find last project file."
 msgstr "Letzte Projektdatei konnte nicht gefunden werden."
 
+msgid "Cannot find project file."
+msgstr "Projektdatei nicht gefunden."
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Sie haben noch kein Projekt in Pixelorama gespeichert oder geöffnet!"
 
@@ -1433,6 +1484,9 @@ msgstr "Backup neu geladen"
 msgid "Remove currently selected palette"
 msgstr "Aktuell ausgewählte Palette entfernen"
 
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr "Sind Sie sicher, dass Sie diese Palette entfernen möchten? (Kann nicht rückgängig gemacht werden)"
+
 msgid "You can't remove more palettes!"
 msgstr "Sie können nicht mehr Paletten entfernen!"
 
@@ -1444,4 +1498,22 @@ msgstr "Beim Entfernen der Palette ist ein Fehler aufgetreten! Fehlercode: %s"
 
 msgid "and"
 msgstr "und"
+
+msgid "Move the selected frame to the left."
+msgstr "Verschiebe den ausgewählten Frame nach links."
+
+msgid "Move the selected frame to the right."
+msgstr "Verschiebe den ausgewählten Frame nach rechts."
+
+msgid "Frame duration"
+msgstr "Frame-Dauer"
+
+msgid "Tiled In Both Axis"
+msgstr "In beiden Achsen gekachelt"
+
+msgid "Tiled In X Axis"
+msgstr "In X-Achse gekachelt"
+
+msgid "Tiled In Y Axis"
+msgstr "Tiled in Y-Achse"
 

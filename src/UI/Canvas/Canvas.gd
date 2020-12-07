@@ -4,7 +4,7 @@ extends Node2D
 
 var location := Vector2.ZERO
 var fill_color := Color(0, 0, 0, 0)
-var current_pixel := Vector2.ZERO # pretty much same as mouse_pos, but can be accessed externally
+var current_pixel := Vector2.ZERO
 var can_undo := true
 var cursor_image_has_changed := false
 var sprite_changed_this_frame := false # for optimization purposes
@@ -27,16 +27,23 @@ func _draw() -> void:
 	Global.small_preview_viewport.get_child(0).get_node("CanvasPreview").update()
 
 	var current_cels : Array = Global.current_project.frames[Global.current_project.current_frame].cels
-	if Global.onion_skinning:
-		onion_skinning()
 
+	var _position := position
+	var _scale := scale
+	if Global.mirror_view:
+		_position.x = _position.x + Global.current_project.size.x
+		_scale.x = -1
+	draw_set_transform(_position, rotation, _scale)
 	# Draw current frame layers
 	for i in range(Global.current_project.layers.size()):
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
 		if Global.current_project.layers[i].visible: # if it's visible
 			draw_texture(current_cels[i].image_texture, location, modulate_color)
 
+	if Global.onion_skinning:
+		onion_skinning()
 	tile_mode.update()
+	draw_set_transform(position, rotation, scale)
 
 
 func _input(event : InputEvent) -> void:
@@ -50,7 +57,11 @@ func _input(event : InputEvent) -> void:
 #	elif not get_viewport_rect().has_point(event.position):
 #		return
 
-	current_pixel = get_local_mouse_position() + location
+	# Do not use self.get_local_mouse_position() because it return unexpected
+	# value when shrink parameter is not equal to one. At godot version 3.2.3
+	var tmp_transform = get_canvas_transform().affine_inverse()
+	var tmp_position = Global.main_viewport.get_local_mouse_position()
+	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin + location
 
 	if Global.has_focus:
 		update()

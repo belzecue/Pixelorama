@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-11-23 16:59\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -28,7 +28,7 @@ msgid "Please Confirm..."
 msgstr "Lūdzu, apstiprini..."
 
 msgid "File Name:"
-msgstr ""
+msgstr "Faila nosaukums:"
 
 msgid "Image Size"
 msgstr "Attēla izmērs"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "Augstums:"
 
 msgid "Center"
-msgstr ""
+msgstr "Centrs"
 
 msgid "File"
 msgstr "Fails"
@@ -67,7 +67,7 @@ msgid "Help"
 msgstr "Palīdzība"
 
 msgid "New"
-msgstr ""
+msgstr "Jauns"
 
 msgid "New..."
 msgstr "Jauns..."
@@ -112,13 +112,16 @@ msgid "Redo"
 msgstr "Pārstrādāt"
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopēt"
+
+msgid "Cut"
+msgstr "Izgriezt"
 
 msgid "Paste"
-msgstr ""
+msgstr "Iekopēt"
 
 msgid "Delete"
-msgstr ""
+msgstr "Izdzēst"
 
 msgid "Scale Image"
 msgstr "Mainīt attēla izmēru"
@@ -136,7 +139,7 @@ msgid "Clear Selection"
 msgstr "Notīrīt atlasi"
 
 msgid "Flip"
-msgstr ""
+msgstr "Apmest"
 
 msgid "Flip Horizontal"
 msgstr "Apmest horizontāli"
@@ -149,6 +152,9 @@ msgstr "Iestatījumi"
 
 msgid "Tile Mode"
 msgstr "Flīžu režīms"
+
+msgid "Mirror View"
+msgstr ""
 
 msgid "Show Grid"
 msgstr "Rādīt režģi"
@@ -181,10 +187,13 @@ msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
-msgstr ""
+msgstr "Importēt kā:"
+
+msgid "Recent projects"
+msgstr "Pēdējie Projekti"
 
 msgid "New tab"
-msgstr ""
+msgstr "Jauna cilne"
 
 msgid "Spritesheet (new tab)"
 msgstr ""
@@ -279,7 +288,7 @@ msgid "Resize:"
 msgstr "Mainīt izmēru:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Atcelt eksportēšanu"
 
 msgid "Alert!"
 msgstr ""
@@ -359,6 +368,9 @@ msgstr ""
 msgid "Language"
 msgstr "Valoda"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Tēmas"
 
@@ -404,6 +416,9 @@ msgstr "Vadlīnijas krāsa:"
 msgid "System Language"
 msgstr "Systēmas valoda"
 
+msgid "Display Scale"
+msgstr ""
+
 msgid "Dark"
 msgstr "Tumš"
 
@@ -418,6 +433,9 @@ msgstr ""
 
 msgid "Light"
 msgstr "Gaišs"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr ""
@@ -470,13 +488,13 @@ msgstr ""
 msgid "Angle:"
 msgstr ""
 
-msgid "Hue"
+msgid "Hue:"
 msgstr ""
 
-msgid "Saturation"
+msgid "Saturation:"
 msgstr ""
 
-msgid "Value"
+msgid "Value:"
 msgstr ""
 
 msgid "Apply"
@@ -920,6 +938,12 @@ msgstr ""
 msgid "Offset"
 msgstr ""
 
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
 msgid "Lighten"
 msgstr "Izgaismot"
 
@@ -1094,6 +1118,12 @@ msgstr ""
 msgid "Unlink Cel"
 msgstr ""
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Slānis"
 
@@ -1120,6 +1150,9 @@ msgstr "Apvienot aktuālo slāni ar apakšējo slāni"
 
 msgid "Opacity:"
 msgstr "Necaurspīdīgums:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Slāņa redzamības slēdzis"
@@ -1227,6 +1260,12 @@ msgstr ""
 msgid "Redo: Delete Frame Tag"
 msgstr ""
 
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
+
 msgid "Move Guide"
 msgstr "Pārvietot vadlīniju"
 
@@ -1236,10 +1275,10 @@ msgstr "Fails saglabāts"
 msgid "File autosaved"
 msgstr ""
 
-msgid "File failed to open"
+msgid "File failed to open. Error code %s"
 msgstr ""
 
-msgid "File failed to save"
+msgid "File failed to save. Error code %s"
 msgstr ""
 
 msgid "File exported"
@@ -1277,6 +1316,15 @@ msgstr "Nederīgs paletes fails!"
 
 msgid "Edit Palette"
 msgstr "Rediģēt paleti"
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
+msgstr ""
 
 msgid "Patrons:"
 msgstr "Labvēļi:"
@@ -1383,6 +1431,9 @@ msgstr ""
 msgid "Cannot find last project file."
 msgstr ""
 
+msgid "Cannot find project file."
+msgstr ""
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr ""
 
@@ -1429,6 +1480,9 @@ msgstr ""
 msgid "Remove currently selected palette"
 msgstr ""
 
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr ""
+
 msgid "You can't remove more palettes!"
 msgstr ""
 
@@ -1439,5 +1493,23 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 
 msgid "and"
+msgstr ""
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
 msgstr ""
 

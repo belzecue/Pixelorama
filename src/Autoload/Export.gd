@@ -68,15 +68,16 @@ func external_export() -> void:
 
 
 func process_frame() -> void:
+	processed_images.clear()
 	var frame = Global.current_project.frames[frame_number - 1]
 	var image := Image.new()
 	image.create(Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8)
 	blend_layers(image, frame)
-	processed_images.clear()
 	processed_images.append(image)
 
 
 func process_spritesheet() -> void:
+	processed_images.clear()
 	# Range of frames determined by tags
 	var frames := []
 	if frame_current_tag > 0:
@@ -98,7 +99,6 @@ func process_spritesheet() -> void:
 
 	var whole_image := Image.new()
 	whole_image.create(width, height, false, Image.FORMAT_RGBA8)
-	whole_image.lock()
 	var origin := Vector2.ZERO
 	var hh := 0
 	var vv := 0
@@ -124,7 +124,6 @@ func process_spritesheet() -> void:
 				origin.x = Global.current_project.size.x * vv
 		blend_layers(whole_image, frame, origin)
 
-	processed_images.clear()
 	processed_images.append(whole_image)
 
 
@@ -185,18 +184,19 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 			gif_export_thread.start(self, "export_gif", {"export_dialog": export_dialog, "export_paths": export_paths})
 	else:
 		for i in range(processed_images.size()):
-			processed_images[i].unlock()
 			if OS.get_name() == "HTML5":
 				Html5FileExchange.save_image(processed_images[i], export_paths[i].get_file())
 			else:
 				var err = processed_images[i].save_png(export_paths[i])
 				if err != OK:
-					OS.alert("Can't save file. Error code: %s" % err)
-			processed_images[i].lock()
+					Global.error_dialog.set_text(tr("File failed to save. Error code %s") % err)
+					Global.error_dialog.popup_centered()
+					Global.dialog_open(true)
 
 	# Store settings for quick export and when the dialog is opened again
 	was_exported = true
-	Global.file_menu.get_popup().set_item_text(5, tr("Export") + " %s" % (file_name + file_format_string(file_format)))
+	Global.current_project.was_exported = true
+	Global.file_menu.get_popup().set_item_text(6, tr("Export") + " %s" % (file_name + file_format_string(file_format)))
 
 	# Only show when not exporting gif - gif export finishes in thread
 	if not (current_tab == ExportTab.ANIMATION and animation_type == AnimationType.ANIMATED):
@@ -216,16 +216,16 @@ func export_gif(args: Dictionary) -> void:
 	match direction:
 		AnimationDirection.FORWARD:
 			for i in range(processed_images.size()):
-				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
+				write_frame_to_gif(processed_images[i], Global.current_project.frame_duration[i] * (1 / Global.animation_timeline.fps), exporter, args["export_dialog"])
 		AnimationDirection.BACKWARDS:
 			for i in range(processed_images.size() - 1, -1, -1):
-				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
+				write_frame_to_gif(processed_images[i], Global.current_project.frame_duration[i] * (1 / Global.animation_timeline.fps), exporter, args["export_dialog"])
 		AnimationDirection.PING_PONG:
 			export_progress_fraction = 100 / (processed_images.size() * 2)
 			for i in range(0, processed_images.size()):
-				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
+				write_frame_to_gif(processed_images[i], Global.current_project.frame_duration[i] * (1 / Global.animation_timeline.fps), exporter, args["export_dialog"])
 			for i in range(processed_images.size() - 2, 0, -1):
-				write_frame_to_gif(processed_images[i], Global.animation_timer.wait_time, exporter, args["export_dialog"])
+				write_frame_to_gif(processed_images[i], Global.current_project.frame_duration[i] * (1 / Global.animation_timeline.fps), exporter, args["export_dialog"])
 
 	if OS.get_name() == "HTML5":
 		Html5FileExchange.save_gif(exporter.export_file_data(), args["export_paths"][0])
@@ -321,6 +321,7 @@ func blend_layers(image : Image, frame : Frame, origin : Vector2 = Vector2(0, 0)
 						var alpha : float = pixel_color.a * cel.opacity
 						cel_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
 			image.blend_rect(cel_image, Rect2(Global.canvas.location, Global.current_project.size), origin)
+			cel_image.unlock()
 		layer_i += 1
 	image.unlock()
 

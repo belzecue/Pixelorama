@@ -257,7 +257,10 @@ func draw_tool_circle(position : Vector2, fill := false) -> void:
 
 
 func draw_tool_brush(position : Vector2) -> void:
-	if Global.tile_mode and _get_tile_mode_rect().has_point(position):
+	if Global.mirror_view:
+		position.x = Global.current_project.size.x - position.x
+
+	if Global.current_project.tile_mode and _get_tile_mode_rect().has_point(position):
 		position = position.posmodv(Global.current_project.size)
 
 	var size := _brush_image.get_size()
@@ -302,7 +305,7 @@ func draw_tool_brush(position : Vector2) -> void:
 
 func draw_indicator() -> void:
 	draw_indicator_at(_cursor, Vector2.ZERO, Color.blue)
-	if Global.tile_mode and _get_tile_mode_rect().has_point(_cursor):
+	if Global.current_project.tile_mode and _get_tile_mode_rect().has_point(_cursor):
 		var tile := _line_start if _draw_line else _cursor
 		if not tile in Global.current_project.selected_pixels:
 			var offset := tile - tile.posmodv(Global.current_project.size)
@@ -331,7 +334,9 @@ func draw_indicator_at(position : Vector2, offset : Vector2, color : Color) -> v
 
 func _set_pixel(position : Vector2) -> void:
 	var project : Project = Global.current_project
-	if Global.tile_mode and _get_tile_mode_rect().has_point(position):
+	if Global.mirror_view:
+		position.x = project.size.x - position.x - 1
+	if Global.current_project.tile_mode and _get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
 
 	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-11-30 13:24\n"
 
 msgid "OK"
 msgstr "Onayla"
@@ -46,7 +46,7 @@ msgid "Height:"
 msgstr "Yükseklik:"
 
 msgid "Center"
-msgstr "Merkez"
+msgstr "Ortala"
 
 msgid "File"
 msgstr "Dosya"
@@ -114,6 +114,9 @@ msgstr "İleri Al"
 msgid "Copy"
 msgstr "Kopyala"
 
+msgid "Cut"
+msgstr "Kes"
+
 msgid "Paste"
 msgstr "Yapıştır"
 
@@ -150,6 +153,9 @@ msgstr "Tercihler"
 msgid "Tile Mode"
 msgstr "Karo Modu"
 
+msgid "Mirror View"
+msgstr ""
+
 msgid "Show Grid"
 msgstr "Kılavuz çizgilerini göster"
 
@@ -182,6 +188,9 @@ msgstr "İçeri Aktarma Ayarları"
 
 msgid "Import as:"
 msgstr "İçe farklı aktar:"
+
+msgid "Recent projects"
+msgstr ""
 
 msgid "New tab"
 msgstr "Yeni sekme"
@@ -359,6 +368,9 @@ msgstr "Başlamak"
 msgid "Language"
 msgstr "Dil"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Temalar"
 
@@ -384,10 +396,10 @@ msgid "Smooth Zoom"
 msgstr "Yumuşak Yakınlaştırma"
 
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "هنگام دور و نزدیک شدن، انتقال نرم تری نشان می دهد"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "حساسیت قلم:"
 
 msgid "None"
 msgstr "Hiç biri"
@@ -404,6 +416,9 @@ msgstr "Kılavuz çizgileri rengi:"
 msgid "System Language"
 msgstr "Sistem Dili"
 
+msgid "Display Scale"
+msgstr ""
+
 msgid "Dark"
 msgstr "Koyu"
 
@@ -418,6 +433,9 @@ msgstr "Karamel"
 
 msgid "Light"
 msgstr "Açık"
+
+msgid "Purple"
+msgstr ""
 
 msgid "Only affect selection"
 msgstr ""
@@ -470,14 +488,14 @@ msgstr "Tür:"
 msgid "Angle:"
 msgstr "Açı:"
 
-msgid "Hue"
-msgstr "Renk Tonu"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Renk doygunluğu"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Değer"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Uygula"
@@ -525,7 +543,7 @@ msgid "About Pixelorama"
 msgstr "Pixelorama Hakkında"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - Hayallerini pikselleştir!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive Tarafından Geliştirilmiştir"
@@ -534,7 +552,7 @@ msgid "Copyright 2019-2020 Orama Interactive and contributors"
 msgstr ""
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 Orama Interactive ve destekçileri tarafından"
 
 msgid "Website"
 msgstr "İnternet sitesi"
@@ -645,7 +663,7 @@ msgid "imported"
 msgstr ""
 
 msgid "copy"
-msgstr ""
+msgstr "kopya"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Pixelorama'dan çıkmak istediğine emin misin?"
@@ -789,7 +807,7 @@ msgid "Isometric"
 msgstr "İzometrik"
 
 msgid "All"
-msgstr ""
+msgstr "Tümü"
 
 msgid "Grid width:"
 msgstr "Kılavuz çizgi genişliği:"
@@ -909,6 +927,12 @@ msgid "Pattern"
 msgstr "Şablon"
 
 msgid "Offset"
+msgstr ""
+
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
 msgstr ""
 
 msgid "Lighten"
@@ -1078,6 +1102,12 @@ msgstr ""
 msgid "Unlink Cel"
 msgstr ""
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Katman"
 
@@ -1104,6 +1134,9 @@ msgstr ""
 
 msgid "Opacity:"
 msgstr "Saydamlık:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr ""
@@ -1211,6 +1244,12 @@ msgstr ""
 msgid "Redo: Delete Frame Tag"
 msgstr ""
 
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
+
 msgid "Move Guide"
 msgstr ""
 
@@ -1220,11 +1259,11 @@ msgstr "Dosya kaydedildi"
 msgid "File autosaved"
 msgstr "Dosya kaydedildi"
 
-msgid "File failed to open"
-msgstr "Dosya açılamadı"
+msgid "File failed to open. Error code %s"
+msgstr ""
 
-msgid "File failed to save"
-msgstr "Dosya kaydedilemedi"
+msgid "File failed to save. Error code %s"
+msgstr ""
 
 msgid "File exported"
 msgstr ""
@@ -1261,6 +1300,15 @@ msgstr "Geçersiz palet dosyası!"
 
 msgid "Edit Palette"
 msgstr "Paleti Düzenle"
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
+msgstr ""
 
 msgid "Patrons:"
 msgstr "Patronlar:"
@@ -1323,7 +1371,7 @@ msgid "Rectangular Selection"
 msgstr ""
 
 msgid "Zoom"
-msgstr ""
+msgstr "Yakınlaştır"
 
 msgid "Color Picker"
 msgstr "Renk Seçici"
@@ -1362,10 +1410,13 @@ msgid "Right Tool:"
 msgstr ""
 
 msgid "A tool assigned to the right mouse button"
-msgstr ""
+msgstr "Sol fareye bir araç atandı"
 
 msgid "Cannot find last project file."
 msgstr "Son proje bulunamadı."
+
+msgid "Cannot find project file."
+msgstr ""
 
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Pixelorama'da henüz bir proje açmadın yada kaydetmedin!"
@@ -1401,7 +1452,7 @@ msgid "Close"
 msgstr "Kapat"
 
 msgid "Delete"
-msgstr ""
+msgstr "Sil"
 
 msgid "Autosaved backup for %s was found.\n"
 "Do you want to reload it?"
@@ -1412,6 +1463,9 @@ msgstr "Yedek yüklendi"
 
 msgid "Remove currently selected palette"
 msgstr "Seçili paleti sil"
+
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr "Bu paleti kaldırmak istediğine emin misin? (Geri alınamaz)"
 
 msgid "You can't remove more palettes!"
 msgstr "Daha fazla palet silemezsin!"
@@ -1424,4 +1478,22 @@ msgstr "Paleti kaldırırken bir hata oldu! Hata kodu: %s"
 
 msgid "and"
 msgstr "ve"
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
+msgstr ""
 

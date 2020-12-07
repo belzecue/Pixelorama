@@ -9,15 +9,15 @@ var artworks := {
 
 var chosen_artwork = ""
 
+onready var latin_font = preload("res://assets/fonts/Roboto-Small.tres")
+onready var cjk_font = preload("res://assets/fonts/CJK/DroidSansFallback-Small.tres")
+
 
 func _on_SplashDialog_about_to_show() -> void:
 	var splash_art_texturerect : TextureRect = Global.find_node_by_name(self, "SplashArt")
 	var art_by_label : Button = Global.find_node_by_name(self, "ArtistName")
 	var show_on_startup_button : CheckBox = Global.find_node_by_name(self, "ShowOnStartup")
 	var copyright_label : Label = Global.find_node_by_name(self, "CopyrightLabel")
-	var become_platinum : Button = Global.find_node_by_name(self, "BecomePlatinum")
-	var become_gold : Button = Global.find_node_by_name(self, "BecomeGold")
-	var become_patron : Button = Global.find_node_by_name(self, "BecomePatron")
 
 	if Global.config_cache.has_section_key("preferences", "startup"):
 		show_on_startup_button.pressed = !Global.config_cache.get_value("preferences", "startup")
@@ -29,21 +29,17 @@ func _on_SplashDialog_about_to_show() -> void:
 	art_by_label.text = tr("Art by: %s") % chosen_artwork
 	art_by_label.hint_tooltip = artworks[chosen_artwork][1]
 
-	become_platinum.text = "- " + tr("Become a Platinum Sponsor")
-	become_gold.text = "- " + tr("Become a Gold Sponsor")
-	become_patron.text = "- " + tr("Become a Patron")
-	if "zh" in TranslationServer.get_locale():
-		show_on_startup_button.add_font_override("font", preload("res://assets/fonts/CJK/NotoSansCJKtc-Small.tres"))
-		copyright_label.add_font_override("font", preload("res://assets/fonts/CJK/NotoSansCJKtc-Small.tres"))
+	if Global.is_cjk(TranslationServer.get_locale()):
+		show_on_startup_button.add_font_override("font", cjk_font)
+		copyright_label.add_font_override("font", cjk_font)
 	else:
-		show_on_startup_button.add_font_override("font", preload("res://assets/fonts/Roboto-Small.tres"))
-		copyright_label.add_font_override("font", preload("res://assets/fonts/Roboto-Small.tres"))
+		show_on_startup_button.add_font_override("font", latin_font)
+		copyright_label.add_font_override("font", latin_font)
 
 	get_stylebox("panel", "WindowDialog").bg_color = Global.control.theme.get_stylebox("panel", "WindowDialog").bg_color
 	get_stylebox("panel", "WindowDialog").border_color = Global.control.theme.get_stylebox("panel", "WindowDialog").border_color
 	if OS.get_name() == "HTML5":
 		$Contents/ButtonsPatronsLogos/Buttons/OpenLastBtn.visible = false
-
 
 
 func _on_ArtCredits_pressed() -> void:
@@ -59,10 +55,6 @@ func _on_ShowOnStartup_toggled(pressed : bool) -> void:
 
 
 func _on_PatreonButton_pressed() -> void:
-	OS.shell_open("https://www.patreon.com/OramaInteractive")
-
-
-func _on_TakeThisSpot_pressed() -> void:
 	OS.shell_open("https://www.patreon.com/OramaInteractive")
 
 

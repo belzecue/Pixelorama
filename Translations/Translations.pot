@@ -103,6 +103,9 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
+msgid "Cut"
+msgstr ""
+
 msgid "Paste"
 msgstr ""
 
@@ -139,6 +142,9 @@ msgstr ""
 msgid "Tile Mode"
 msgstr ""
 
+msgid "Mirror View"
+msgstr ""
+
 msgid "Show Grid"
 msgstr ""
 
@@ -170,6 +176,9 @@ msgid "Import Options"
 msgstr ""
 
 msgid "Import as:"
+msgstr ""
+
+msgid "Recent projects"
 msgstr ""
 
 msgid "New tab"
@@ -347,6 +356,9 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr ""
 
@@ -390,6 +402,9 @@ msgid "Guide color:"
 msgstr ""
 
 msgid "System Language"
+msgstr ""
+
+msgid "Display Scale"
 msgstr ""
 
 msgid "Dark"
@@ -461,13 +476,13 @@ msgstr ""
 msgid "Angle:"
 msgstr ""
 
-msgid "Hue"
+msgid "Hue:"
 msgstr ""
 
-msgid "Saturation"
+msgid "Saturation:"
 msgstr ""
 
-msgid "Value"
+msgid "Value:"
 msgstr ""
 
 msgid "Apply"
@@ -894,6 +909,12 @@ msgstr ""
 msgid "Offset"
 msgstr ""
 
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
 msgid "Lighten"
 msgstr ""
 
@@ -1061,6 +1082,12 @@ msgstr ""
 msgid "Unlink Cel"
 msgstr ""
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr ""
 
@@ -1086,6 +1113,9 @@ msgid "Merge current layer with the one below"
 msgstr ""
 
 msgid "Opacity:"
+msgstr ""
+
+msgid "Tile mode opacity:"
 msgstr ""
 
 msgid "Toggle layer's visibility"
@@ -1194,6 +1224,12 @@ msgstr ""
 msgid "Redo: Delete Frame Tag"
 msgstr ""
 
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
+
 msgid "Move Guide"
 msgstr ""
 
@@ -1203,10 +1239,10 @@ msgstr ""
 msgid "File autosaved"
 msgstr ""
 
-msgid "File failed to open"
+msgid "File failed to open. Error code %s"
 msgstr ""
 
-msgid "File failed to save"
+msgid "File failed to save. Error code %s"
 msgstr ""
 
 msgid "File exported"
@@ -1243,6 +1279,15 @@ msgid "Invalid Palette file!"
 msgstr ""
 
 msgid "Edit Palette"
+msgstr ""
+
+msgid "Create colors with alpha component"
+msgstr ""
+
+msgid "Get colors only from selection"
+msgstr ""
+
+msgid "Get colors from"
 msgstr ""
 
 msgid "Patrons:"
@@ -1350,6 +1395,9 @@ msgstr ""
 msgid "Cannot find last project file."
 msgstr ""
 
+msgid "Cannot find project file."
+msgstr ""
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr ""
 
@@ -1396,6 +1444,9 @@ msgstr ""
 msgid "Remove currently selected palette"
 msgstr ""
 
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr ""
+
 msgid "You can't remove more palettes!"
 msgstr ""
 
@@ -1406,4 +1457,22 @@ msgid "An error occured while removing the palette! Error code: %s"
 msgstr ""
 
 msgid "and"
+msgstr ""
+
+msgid "Move the selected frame to the left."
+msgstr ""
+
+msgid "Move the selected frame to the right."
+msgstr ""
+
+msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
 msgstr ""

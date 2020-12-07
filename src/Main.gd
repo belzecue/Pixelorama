@@ -22,6 +22,9 @@ func _ready() -> void:
 	Global.quit_and_save_dialog.add_button("Save & Exit", false, "Save")
 	Global.quit_and_save_dialog.get_ok().text = "Exit without saving"
 
+	Global.open_sprites_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
+	Global.save_sprites_dialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
+
 	var zstd_checkbox := CheckBox.new()
 	zstd_checkbox.name = "ZSTDCompression"
 	zstd_checkbox.pressed = true
@@ -63,6 +66,9 @@ func setup_application_window_size() -> void:
 		return
 	# Set a minimum window size to prevent UI elements from collapsing on each other.
 	OS.min_window_size = Vector2(1024, 576)
+
+	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,
+		SceneTree.STRETCH_ASPECT_IGNORE, Vector2(1024,576), Global.shrink)
 
 	# Restore the window position/size if values are present in the configuration cache
 	if Global.config_cache.has_section_key("window", "screen"):
@@ -140,6 +146,21 @@ func load_last_project() -> void:
 			Global.dialog_open(true)
 
 
+func load_recent_project_file(path : String) -> void:
+	if OS.get_name() == "HTML5":
+		return
+
+	# Check if file still exists on disk
+	var file_check := File.new()
+	if file_check.file_exists(path): # If yes then load the file
+		OpenSave.handle_loading_files([path])
+	else:
+		# If file doesn't exist on disk then warn user about this
+		Global.error_dialog.set_text("Cannot find project file.")
+		Global.error_dialog.popup_centered()
+		Global.dialog_open(true)
+
+
 func _on_OpenSprite_file_selected(path : String) -> void:
 	OpenSave.handle_loading_files([path])
 
@@ -199,8 +220,8 @@ func _on_BackupConfirmation_confirmed(project_paths : Array, backup_paths : Arra
 	Export.file_name = OpenSave.current_save_paths[0].get_file().trim_suffix(".pxo")
 	Export.directory_path = OpenSave.current_save_paths[0].get_base_dir()
 	Export.was_exported = false
-	Global.file_menu.get_popup().set_item_text(3, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file())
-	Global.file_menu.get_popup().set_item_text(5, tr("Export"))
+	Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % OpenSave.current_save_paths[0].get_file())
+	Global.file_menu.get_popup().set_item_text(6, tr("Export"))
 
 
 func _on_BackupConfirmation_delete(project_paths : Array, backup_paths : Array) -> void:

@@ -5,7 +5,7 @@ enum Grid_Types {CARTESIAN, ISOMETRIC, ALL}
 enum Pressure_Sensitivity {NONE, ALPHA, SIZE, ALPHA_AND_SIZE}
 enum Direction {UP, DOWN, LEFT, RIGHT}
 enum Theme_Types {DARK, BLUE, CARAMEL, LIGHT}
-
+enum Tile_Mode {NONE, BOTH, XAXIS, YAXIS}
 # Stuff for arrowkey-based canvas movements nyaa ^.^
 const low_speed_move_rate := 150.0
 const medium_speed_move_rate := 750.0
@@ -20,6 +20,8 @@ var directory_module : Reference
 var projects := [] # Array of Projects
 var current_project : Project
 var current_project_index := 0 setget project_changed
+
+var recent_projects := []
 
 # Indices are as in the Direction enum
 # This is the total time the key for
@@ -43,6 +45,7 @@ var default_clear_color := Color.gray
 # Preferences
 var pressure_sensitivity_mode = Pressure_Sensitivity.NONE
 var open_last_project := false
+var shrink := 1.0
 var smooth_zoom := true
 var theme_type : int = Theme_Types.DARK
 var default_image_width := 64
@@ -59,6 +62,7 @@ var checker_color_1 := Color(0.47, 0.47, 0.47, 1)
 var checker_color_2 := Color(0.34, 0.35, 0.34, 1)
 var checker_follow_movement := false
 var checker_follow_scale := false
+var tilemode_opacity := 1.0
 
 var autosave_interval := 1.0
 var enable_autosave := true
@@ -70,7 +74,7 @@ var left_square_indicator_visible := true
 var right_square_indicator_visible := false
 
 # View menu options
-var tile_mode := false
+var mirror_view := false
 var draw_grid := false
 var show_rulers := true
 var show_guides := true
@@ -111,6 +115,9 @@ var help_menu : MenuButton
 var cursor_position_label : Label
 var zoom_level_label : Label
 
+var recent_projects_submenu : PopupMenu
+var tile_mode_submenu : PopupMenu
+
 var new_image_dialog : ConfirmationDialog
 var open_sprites_dialog : FileDialog
 var save_sprites_dialog : FileDialog
@@ -127,6 +134,7 @@ var patterns_popup : Popup
 var animation_timeline : Panel
 
 var animation_timer : Timer
+var frame_properties : ConfirmationDialog
 var frame_ids : HBoxContainer
 var current_frame_mark_label : Label
 var onion_skinning_button : BaseButton
@@ -139,6 +147,8 @@ var tag_container : Control
 var tag_dialog : AcceptDialog
 
 var remove_frame_button : BaseButton
+var move_left_frame_button : BaseButton
+var move_right_frame_button : BaseButton
 
 var remove_layer_button : BaseButton
 var move_up_layer_button : BaseButton
@@ -148,7 +158,6 @@ var layer_opacity_slider : HSlider
 var layer_opacity_spinbox : SpinBox
 
 var preview_zoom_slider : VSlider
-
 var add_palette_button : BaseButton
 var edit_palette_button : BaseButton
 var palette_option_button : OptionButton
@@ -167,10 +176,14 @@ onready var current_version : String = ProjectSettings.get_setting("application/
 
 func _ready() -> void:
 	randomize()
+	if OS.get_name() == "OSX":
+		use_osx_shortcuts()
 	if OS.has_feature("standalone"):
 		root_directory = OS.get_executable_path().get_base_dir()
 	# Load settings from the config file
 	config_cache.load("user://cache.ini")
+
+	recent_projects = config_cache.get_value("data", "recent_projects", [])
 
 	# The fact that root_dir is set earlier than this is important
 	# XDGDataDirs depends on it nyaa
@@ -205,6 +218,18 @@ func _ready() -> void:
 	cursor_position_label = find_node_by_name(root, "CursorPosition")
 	zoom_level_label = find_node_by_name(root, "ZoomLevel")
 
+	recent_projects_submenu = PopupMenu.new()
+	recent_projects_submenu.set_name("recent_projects_submenu")
+
+	tile_mode_submenu = PopupMenu.new()
+	tile_mode_submenu.set_name("tile_mode_submenu")
+	tile_mode_submenu.add_radio_check_item("None", 0)
+	tile_mode_submenu.set_item_checked(0, true)
+	tile_mode_submenu.add_radio_check_item("Tiled In Both Axis", 1)
+	tile_mode_submenu.add_radio_check_item("Tiled In X Axis", 2)
+	tile_mode_submenu.add_radio_check_item("Tiled In Y Axis", 3)
+	tile_mode_submenu.hide_on_checkable_item_selection = false
+
 	new_image_dialog = find_node_by_name(root, "CreateNewImage")
 	open_sprites_dialog = find_node_by_name(root, "OpenSprite")
 	save_sprites_dialog = find_node_by_name(root, "SaveSprite")
@@ -219,6 +244,7 @@ func _ready() -> void:
 	patterns_popup = find_node_by_name(root, "PatternsPopup")
 
 	animation_timeline = find_node_by_name(root, "AnimationTimeline")
+	frame_properties = find_node_by_name(root, "FrameProperties")
 
 	layers_container = find_node_by_name(animation_timeline, "LayersContainer")
 	frames_container = find_node_by_name(animation_timeline, "FramesContainer")
@@ -233,6 +259,8 @@ func _ready() -> void:
 	tag_dialog = find_node_by_name(animation_timeline, "FrameTagDialog")
 
 	remove_frame_button = find_node_by_name(animation_timeline, "DeleteFrame")
+	move_left_frame_button = find_node_by_name(animation_timeline, "MoveLeft")
+	move_right_frame_button = find_node_by_name(animation_timeline, "MoveRight")
 
 	remove_layer_button = find_node_by_name(animation_timeline, "RemoveLayer")
 	move_up_layer_button = find_node_by_name(animation_timeline, "MoveUpLayer")
@@ -278,7 +306,7 @@ func find_node_by_name(root : Node, node_name : String) -> Node:
 func notification_label(text : String) -> void:
 	var notification : Label = load("res://src/UI/NotificationLabel.tscn").instance()
 	notification.text = tr(text)
-	notification.rect_position = Vector2(240, OS.window_size.y - animation_timeline.rect_size.y - 20)
+	notification.rect_position = Vector2(70, OS.window_size.y - animation_timeline.rect_size.y - 20)
 	notification.theme = control.theme
 	get_tree().get_root().add_child(notification)
 
@@ -487,6 +515,10 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 (%s)""") % InputMap.get_action_list("go_to_last_frame")[0].as_text()
 
 
+func is_cjk(locale : String) -> bool:
+	return "zh" in locale or "ko" in locale
+
+
 func _exit_tree() -> void:
 	config_cache.set_value("window", "screen", OS.current_screen)
 	config_cache.set_value("window", "maximized", OS.window_maximized || OS.window_fullscreen)
@@ -499,3 +531,35 @@ func _exit_tree() -> void:
 		project.undo_redo.free()
 		OpenSave.remove_backup(i)
 		i += 1
+
+
+func save_project_to_recent_list(path : String) -> void:
+	if path.get_file().substr(0, 7) == "backup-" or path == "":
+		return
+
+	if recent_projects.has(path):
+		return
+
+	if recent_projects.size() >= 5:
+		recent_projects.pop_front()
+	recent_projects.push_back(path)
+
+	config_cache.set_value("data", "recent_projects", recent_projects)
+
+	recent_projects_submenu.clear()
+	update_recent_projects_submenu()
+
+
+func update_recent_projects_submenu() -> void:
+	for project in Global.recent_projects:
+		recent_projects_submenu.add_item(project.get_file())
+
+func use_osx_shortcuts() -> void:
+	var inputmap := InputMap 
+	
+	for action in inputmap.get_actions():
+		var event : InputEvent = inputmap.get_action_list(action)[0] 
+		
+		if event.control:
+			event.control = false
+			event.command = true

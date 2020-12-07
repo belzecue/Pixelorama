@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-11-23 16:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -114,6 +114,9 @@ msgstr "Znovu"
 msgid "Copy"
 msgstr "Kopírovat"
 
+msgid "Cut"
+msgstr "Vyjmout"
+
 msgid "Paste"
 msgstr "Vložit"
 
@@ -150,6 +153,9 @@ msgstr "Nastavení"
 msgid "Tile Mode"
 msgstr "Režim dlaždic"
 
+msgid "Mirror View"
+msgstr ""
+
 msgid "Show Grid"
 msgstr "Zobrazit mřížku"
 
@@ -182,6 +188,9 @@ msgstr "Nastavení importu"
 
 msgid "Import as:"
 msgstr "Importovat jako:"
+
+msgid "Recent projects"
+msgstr ""
 
 msgid "New tab"
 msgstr "Nová záložka"
@@ -359,6 +368,9 @@ msgstr "Po spuštění"
 msgid "Language"
 msgstr "Jazyk"
 
+msgid "Interface"
+msgstr ""
+
 msgid "Themes"
 msgstr "Motivy"
 
@@ -404,6 +416,9 @@ msgstr "Barva vodítka:"
 msgid "System Language"
 msgstr "Systémový jazyk"
 
+msgid "Display Scale"
+msgstr ""
+
 msgid "Dark"
 msgstr "Tmavý"
 
@@ -418,6 +433,9 @@ msgstr "Karamel"
 
 msgid "Light"
 msgstr "Světlý"
+
+msgid "Purple"
+msgstr "Fialová"
 
 msgid "Only affect selection"
 msgstr "Pouze ovlivňuje výběr"
@@ -470,14 +488,14 @@ msgstr "Typ:"
 msgid "Angle:"
 msgstr "Úhel:"
 
-msgid "Hue"
-msgstr "Odstín"
+msgid "Hue:"
+msgstr ""
 
-msgid "Saturation"
-msgstr "Sytost"
+msgid "Saturation:"
+msgstr ""
 
-msgid "Value"
-msgstr "Hodnota"
+msgid "Value:"
+msgstr ""
 
 msgid "Apply"
 msgstr "Použít"
@@ -531,10 +549,10 @@ msgid "Developed by Orama Interactive"
 msgstr "Vyvinuto Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Copyright 2019-2020 Orama Interactive a přispěvatelé"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 od Orama Interactive a přispěvatelů"
 
 msgid "Website"
 msgstr "Webové stránky"
@@ -922,6 +940,12 @@ msgstr "Šablona"
 msgid "Offset"
 msgstr "Odsazení"
 
+msgid "Simple Shading"
+msgstr ""
+
+msgid "Hue Shifting"
+msgstr ""
+
 msgid "Lighten"
 msgstr "Zesvětlení"
 
@@ -1097,6 +1121,12 @@ msgstr "Připojit buňku"
 msgid "Unlink Cel"
 msgstr "Odpojit buňku"
 
+msgid "Frame Properties"
+msgstr ""
+
+msgid "Frame properties"
+msgstr ""
+
 msgid "Layer"
 msgstr "Vrstva"
 
@@ -1123,6 +1153,9 @@ msgstr "Sloučit aktuální vrstvu s vrstvou níže"
 
 msgid "Opacity:"
 msgstr "Průhlednost:"
+
+msgid "Tile mode opacity:"
+msgstr ""
 
 msgid "Toggle layer's visibility"
 msgstr "Přepnout viditelnost vrstvy"
@@ -1231,6 +1264,12 @@ msgstr "Zpět: Odstranit snímkový štítek"
 msgid "Redo: Delete Frame Tag"
 msgstr "Vpřed: Odstranit snímkový štítek"
 
+msgid "Undo: Change frame duration"
+msgstr ""
+
+msgid "Redo: Change frame duration"
+msgstr ""
+
 msgid "Move Guide"
 msgstr "Přesunout vodítko"
 
@@ -1240,11 +1279,11 @@ msgstr "Soubor uložen"
 msgid "File autosaved"
 msgstr "Soubor automaticky uložen"
 
-msgid "File failed to open"
-msgstr "Otevření souboru selhalo"
+msgid "File failed to open. Error code %s"
+msgstr "Otevření souboru se nezdařilo. Chybový kód %s"
 
-msgid "File failed to save"
-msgstr "Uložení souboru selhalo"
+msgid "File failed to save. Error code %s"
+msgstr "Soubor se nepodařilo uložit. Kód chyby %s"
 
 msgid "File exported"
 msgstr "Soubor exportován"
@@ -1281,6 +1320,15 @@ msgstr "Neplatný soubor palety!"
 
 msgid "Edit Palette"
 msgstr "Upravit paletu"
+
+msgid "Create colors with alpha component"
+msgstr "Vytvořit barvy s alfa komponentou"
+
+msgid "Get colors only from selection"
+msgstr "Získat barvy pouze z výběru"
+
+msgid "Get colors from"
+msgstr "Získat barvy z"
 
 msgid "Patrons:"
 msgstr "Patroni:"
@@ -1387,6 +1435,9 @@ msgstr "Nástroj přiřazený k pravému tlačítku myši"
 msgid "Cannot find last project file."
 msgstr "Nelze nalézt soubor posledního projektu."
 
+msgid "Cannot find project file."
+msgstr ""
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Zatím jste neuložili ani neotevřeli žádný projekt v Pixeloramě!"
 
@@ -1434,6 +1485,9 @@ msgstr "Záloha znovu načtena"
 msgid "Remove currently selected palette"
 msgstr "Odstranit aktuálně vybranou paletu"
 
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr "Jste si jisti, že chcete odstranit tuto paletu? (Nevratná změna)"
+
 msgid "You can't remove more palettes!"
 msgstr "Nelze odstranit více palet!"
 
@@ -1445,4 +1499,22 @@ msgstr "Při odstraňování palety došlo k chybě! Kód chyby: %s"
 
 msgid "and"
 msgstr "a"
+
+msgid "Move the selected frame to the left."
+msgstr "Přesunout vybraný snímek doleva."
+
+msgid "Move the selected frame to the right."
+msgstr "Přesunout vybraný snímek doprava."
+
+msgid "Frame duration"
+msgstr ""
+
+msgid "Tiled In Both Axis"
+msgstr ""
+
+msgid "Tiled In X Axis"
+msgstr ""
+
+msgid "Tiled In Y Axis"
+msgstr ""
 

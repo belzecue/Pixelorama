@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2020-09-23 12:31\n"
+"PO-Revision-Date: 2020-11-25 04:31\n"
 
 msgid "OK"
 msgstr "예"
@@ -114,6 +114,9 @@ msgstr "다시 실행"
 msgid "Copy"
 msgstr "복사"
 
+msgid "Cut"
+msgstr "잘라내기"
+
 msgid "Paste"
 msgstr "붙여넣기"
 
@@ -150,6 +153,9 @@ msgstr "환경설정"
 msgid "Tile Mode"
 msgstr "타일 모드"
 
+msgid "Mirror View"
+msgstr "미러뷰"
+
 msgid "Show Grid"
 msgstr "격자 표시"
 
@@ -182,6 +188,9 @@ msgstr "불러오기 옵션"
 
 msgid "Import as:"
 msgstr "다음으로 가져오기:"
+
+msgid "Recent projects"
+msgstr "최근 프로잭트"
 
 msgid "New tab"
 msgstr "새 창"
@@ -359,6 +368,9 @@ msgstr "시작"
 msgid "Language"
 msgstr "언어"
 
+msgid "Interface"
+msgstr "인터페이스"
+
 msgid "Themes"
 msgstr "테마"
 
@@ -404,6 +416,9 @@ msgstr "안내선 색:"
 msgid "System Language"
 msgstr "시스템 언어"
 
+msgid "Display Scale"
+msgstr "디스플레이 크기"
+
 msgid "Dark"
 msgstr "다크"
 
@@ -418,6 +433,9 @@ msgstr "카라멜"
 
 msgid "Light"
 msgstr "라이트"
+
+msgid "Purple"
+msgstr "보라색"
 
 msgid "Only affect selection"
 msgstr "선택 영역만 영향을 줌"
@@ -470,14 +488,14 @@ msgstr "타입:"
 msgid "Angle:"
 msgstr "각도:"
 
-msgid "Hue"
-msgstr "색상"
+msgid "Hue:"
+msgstr "색조:"
 
-msgid "Saturation"
-msgstr "채도"
+msgid "Saturation:"
+msgstr "채도:"
 
-msgid "Value"
-msgstr "명도"
+msgid "Value:"
+msgstr "명도:"
 
 msgid "Apply"
 msgstr "적용"
@@ -531,10 +549,10 @@ msgid "Developed by Orama Interactive"
 msgstr "Orama Interactive가 개발함"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "저작권 2019-2020 Orama Interactive and contributors"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 by Orama Interactive and contributors"
 
 msgid "Website"
 msgstr "웹사이트"
@@ -922,6 +940,12 @@ msgstr "패턴"
 msgid "Offset"
 msgstr "오프셋"
 
+msgid "Simple Shading"
+msgstr "간단한 셰이딩"
+
+msgid "Hue Shifting"
+msgstr "색조 변화"
+
 msgid "Lighten"
 msgstr "밝게"
 
@@ -935,7 +959,7 @@ msgid "Lighten/Darken amount"
 msgstr "밝게/어둡게 정도"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "선택 대상:"
 
 msgid "Left Color"
 msgstr "왼쪽 색상"
@@ -1097,6 +1121,12 @@ msgstr "셀 연결"
 msgid "Unlink Cel"
 msgstr "셀 연결 해제"
 
+msgid "Frame Properties"
+msgstr "프레임 속성"
+
+msgid "Frame properties"
+msgstr "프레임 속성"
+
 msgid "Layer"
 msgstr "레이어"
 
@@ -1123,6 +1153,9 @@ msgstr "현재 레이어와 그 아래 레이어를 병합"
 
 msgid "Opacity:"
 msgstr "투명도:"
+
+msgid "Tile mode opacity:"
+msgstr "타일 모드 불투명도:"
 
 msgid "Toggle layer's visibility"
 msgstr "레이어 표시 토글"
@@ -1231,8 +1264,14 @@ msgstr "실행 취소: 프레임 태그 삭제"
 msgid "Redo: Delete Frame Tag"
 msgstr "다시 실행: 프레임 태그 삭제"
 
+msgid "Undo: Change frame duration"
+msgstr "실행 취소: 프레임 기간 변경"
+
+msgid "Redo: Change frame duration"
+msgstr "다시 실행: 프레임 기간 변경"
+
 msgid "Move Guide"
-msgstr ""
+msgstr "이동 가이드"
 
 msgid "File saved"
 msgstr "파일 저장됨"
@@ -1240,11 +1279,11 @@ msgstr "파일 저장됨"
 msgid "File autosaved"
 msgstr "파일 자동 저장됨"
 
-msgid "File failed to open"
-msgstr "파일 불러오기 실패"
+msgid "File failed to open. Error code %s"
+msgstr "코드 에러. 파일을 여는것을 실패힜읍니다"
 
-msgid "File failed to save"
-msgstr "파일 저장 실패"
+msgid "File failed to save. Error code %s"
+msgstr "코드 에러. 파일을 저장을 실패했읍니다"
 
 msgid "File exported"
 msgstr "파일이 내보내졌습니다"
@@ -1281,6 +1320,15 @@ msgstr "유효하지 않은 팔레트 파일입니다!"
 
 msgid "Edit Palette"
 msgstr "팔레트 수정"
+
+msgid "Create colors with alpha component"
+msgstr "알파 구성으로 색깔을 만들기"
+
+msgid "Get colors only from selection"
+msgstr "선택한 색깔에서만 가져오기"
+
+msgid "Get colors from"
+msgstr "색깔들을 어디에서 가져오기"
 
 msgid "Patrons:"
 msgstr "후원자:"
@@ -1387,6 +1435,9 @@ msgstr "오른쪽 마우스 버튼에 지정된 툴"
 msgid "Cannot find last project file."
 msgstr "최근 프로젝트 파일을 찾을 수 없습니다."
 
+msgid "Cannot find project file."
+msgstr "프로젝트 파일을 찾을 수 없읍니다."
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "당신은 아직 Pixelorama에서 프로젝트을 열거나 저장한적이 없습니다!"
 
@@ -1434,6 +1485,9 @@ msgstr "백업본을 다시 불러오는 중"
 msgid "Remove currently selected palette"
 msgstr "현재 선택된 팔레트 제거"
 
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr "이 팔렛을 지울까요? (진행하면 되돌릴 수 없습니다.)"
+
 msgid "You can't remove more palettes!"
 msgstr "팔레트를 더 이상 지울 수 없습니다!"
 
@@ -1445,4 +1499,22 @@ msgstr "팔레트를 제거하던 도중 오류가 발생했습니다! 오류 �
 
 msgid "and"
 msgstr "그리고"
+
+msgid "Move the selected frame to the left."
+msgstr "선택한 프레임을 왼쪽으로 움직여주세요"
+
+msgid "Move the selected frame to the right."
+msgstr "선택한 프레임을 오른쪽으로 움직여주세요"
+
+msgid "Frame duration"
+msgstr "프레임 기간"
+
+msgid "Tiled In Both Axis"
+msgstr "양 축으로 타일을 두르기"
+
+msgid "Tiled In X Axis"
+msgstr "X 축으로 타일을 두르기"
+
+msgid "Tiled In Y Axis"
+msgstr "Y 축으로 타일을 두르기"
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2020-09-23 12:30\n"
+"PO-Revision-Date: 2020-11-23 17:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -25,7 +25,7 @@ msgid "Save"
 msgstr "Salvează"
 
 msgid "Please Confirm..."
-msgstr "Te rugăm să confirmi..."
+msgstr "Confirmă alegerea..."
 
 msgid "File Name:"
 msgstr "Numele fișierului:"
@@ -114,6 +114,9 @@ msgstr "Refacere"
 msgid "Copy"
 msgstr "Copiere"
 
+msgid "Cut"
+msgstr "Decupare"
+
 msgid "Paste"
 msgstr "Lipire"
 
@@ -148,7 +151,10 @@ msgid "Preferences"
 msgstr "Preferințe"
 
 msgid "Tile Mode"
-msgstr "Mod Mozaic"
+msgstr "Mod mozaic"
+
+msgid "Mirror View"
+msgstr "Vizualizare oglindită"
 
 msgid "Show Grid"
 msgstr "Afișare grilă"
@@ -163,7 +169,7 @@ msgid "Show Animation Timeline"
 msgstr "Afișare cronologia animației"
 
 msgid "Zen Mode"
-msgstr "Mod Zen"
+msgstr "Mod zen"
 
 msgid "Fullscreen Mode"
 msgstr "Mod ecran complet"
@@ -182,6 +188,9 @@ msgstr "Opțiuni de importare"
 
 msgid "Import as:"
 msgstr "Importare ca:"
+
+msgid "Recent projects"
+msgstr "Proiecte recente"
 
 msgid "New tab"
 msgstr "Filă nouă"
@@ -291,10 +300,10 @@ msgid "Open a Directory"
 msgstr "Deschide un director"
 
 msgid "All frames as multiple files"
-msgstr "Toate cadrele ca fișiere multiple"
+msgstr "Toate cadrele sub formă de fișiere multiple"
 
 msgid "All frames as a single file animation"
-msgstr "Toate cadrele ca o singură animație de fișier"
+msgstr "Toate cadrele sub formă de animație într-un singur fișier"
 
 msgid "Background:"
 msgstr "Fundal:"
@@ -359,6 +368,9 @@ msgstr "Pornire"
 msgid "Language"
 msgstr "Limbă"
 
+msgid "Interface"
+msgstr "Interfață"
+
 msgid "Themes"
 msgstr "Teme"
 
@@ -390,7 +402,7 @@ msgid "Tablet pressure sensitivity:"
 msgstr "Sensibilitatea de apăsare a tabletei:"
 
 msgid "None"
-msgstr "Niciuna"
+msgstr "Niciunul"
 
 msgid "Affect Brush's Alpha"
 msgstr "Afectează valoarea alfa a pensulei"
@@ -403,6 +415,9 @@ msgstr "Culoarea ghidajului:"
 
 msgid "System Language"
 msgstr "Limba sistemului"
+
+msgid "Display Scale"
+msgstr "Scala de afișare"
 
 msgid "Dark"
 msgstr "Întunecat"
@@ -419,11 +434,14 @@ msgstr "Caramel"
 msgid "Light"
 msgstr "Luminos"
 
+msgid "Purple"
+msgstr "Mov"
+
 msgid "Only affect selection"
 msgstr "Afectează doar selecția"
 
 msgid "Current cel"
-msgstr "Celula actuală"
+msgstr "Celul actual"
 
 msgid "Current frame"
 msgstr "Cadrul actual"
@@ -470,14 +488,14 @@ msgstr "Tip:"
 msgid "Angle:"
 msgstr "Unghi:"
 
-msgid "Hue"
-msgstr "Nuanță"
+msgid "Hue:"
+msgstr "Nuanță:"
 
-msgid "Saturation"
-msgstr "Saturație"
+msgid "Saturation:"
+msgstr "Saturație:"
 
-msgid "Value"
-msgstr "Valoare"
+msgid "Value:"
+msgstr "Valoare:"
 
 msgid "Apply"
 msgstr "Aplicare"
@@ -531,10 +549,10 @@ msgid "Developed by Orama Interactive"
 msgstr "Dezvoltat de Orama Interactive"
 
 msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
+msgstr "Drepturi de autor 2019-2020 Orama Interactive și contribuitorii"
 
 msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-2020 de Orama Interactive și contribuitorii"
 
 msgid "Website"
 msgstr "Pagină de internet"
@@ -706,7 +724,7 @@ msgid "Pencil\n\n"
 msgstr "Creion\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului\n\n"
-"Ține apăsat pe %s pentru a trasa o linie"
+"Ține apăsată tasta %s pentru a trasa o linie"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
@@ -715,7 +733,7 @@ msgid "Eraser\n\n"
 msgstr "Radieră\n\n"
 "%s pentru butonul din stânga al mausului\n"
 "%s pentru butonul din dreapta al mausului\n\n"
-"Ține apăsat pe %s pentru a trage o line"
+"Ține apăsată tasta %s pentru a trasa o linie"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
@@ -922,6 +940,12 @@ msgstr "Model"
 msgid "Offset"
 msgstr "Decalaj"
 
+msgid "Simple Shading"
+msgstr "Umbrire simplă"
+
+msgid "Hue Shifting"
+msgstr "Schimbare de nuanță"
+
 msgid "Lighten"
 msgstr "Luminare"
 
@@ -1092,10 +1116,16 @@ msgid "Add Frame Tag"
 msgstr ""
 
 msgid "Link Cel"
-msgstr "Conectare celulă"
+msgstr "Conectare cel"
 
 msgid "Unlink Cel"
-msgstr "Deconectare celulă"
+msgstr "Deconectare cel"
+
+msgid "Frame Properties"
+msgstr "Proprietățile cadrului"
+
+msgid "Frame properties"
+msgstr "Proprietățile cadrului"
 
 msgid "Layer"
 msgstr "Strat"
@@ -1124,6 +1154,9 @@ msgstr "Îmbină stratul actual cu cel de mai jos"
 msgid "Opacity:"
 msgstr "Opacitate:"
 
+msgid "Tile mode opacity:"
+msgstr "Opacitatea modului mozaic:"
+
 msgid "Toggle layer's visibility"
 msgstr "Comută vizibilitatea stratului"
 
@@ -1135,8 +1168,8 @@ msgstr "Cadru: %s, Strat: %s"
 
 msgid "Enable/disable cel linking\n\n"
 "Linked cels are being shared across multiple frames"
-msgstr "Activează/dezactivează conectarea celulelor\n\n"
-"Celulele conectate sunt distribuite pe mai multe cadre"
+msgstr "Activează/dezactivează conectarea celurilor\n\n"
+"Celurile conectate sunt distribuite pe mai multe cadre"
 
 msgid "Palette"
 msgstr "Paletă"
@@ -1231,6 +1264,12 @@ msgstr "Anulare: ștergerea etichetei cadrului"
 msgid "Redo: Delete Frame Tag"
 msgstr "Refacere: ștergerea etichetei cadrului"
 
+msgid "Undo: Change frame duration"
+msgstr "Anulare: modificarea duratei cadrului"
+
+msgid "Redo: Change frame duration"
+msgstr "Refacere: modificarea duratei cadrului"
+
 msgid "Move Guide"
 msgstr "Deplasare ghidaj"
 
@@ -1240,11 +1279,11 @@ msgstr "Fișier salvat"
 msgid "File autosaved"
 msgstr "Fișier autosalvat"
 
-msgid "File failed to open"
-msgstr "Fișierul nu a putut fi deschis"
+msgid "File failed to open. Error code %s"
+msgstr "Fișierul nu a putut fi deschis. Cod de eroare %s"
 
-msgid "File failed to save"
-msgstr "Fișierul nu a putut fi salvat"
+msgid "File failed to save. Error code %s"
+msgstr "Fișierul nu a putut fi salvat. Cod de eroare %s"
 
 msgid "File exported"
 msgstr "Fișier exportat"
@@ -1268,7 +1307,7 @@ msgid "Use current left & right colors"
 msgstr "Folosește culorile din stânga și dreapta"
 
 msgid "Create a new empty palette?"
-msgstr "Creare paletă nouă goală?"
+msgstr "Creezi o paletă nouă goală?"
 
 msgid "Error"
 msgstr "Eroare"
@@ -1281,6 +1320,15 @@ msgstr "Fișier de paletă invalid!"
 
 msgid "Edit Palette"
 msgstr "Editare paletă"
+
+msgid "Create colors with alpha component"
+msgstr "Creează culori cu componentă alfa"
+
+msgid "Get colors only from selection"
+msgstr "Obține culori doar din selecție"
+
+msgid "Get colors from"
+msgstr "Obține culori din"
 
 msgid "Patrons:"
 msgstr "Susținători:"
@@ -1387,6 +1435,9 @@ msgstr "Un instrument alocat butonului din dreapta al masului"
 msgid "Cannot find last project file."
 msgstr "Ultimul fișier de proiect nu poate fi găsit."
 
+msgid "Cannot find project file."
+msgstr "Fișierul de proiect nu poate fi găsit."
+
 msgid "You haven't saved or opened any project in Pixelorama yet!"
 msgstr "Încă nu ai salvat sau deschis niciun proiect în Pixelorama!"
 
@@ -1434,6 +1485,9 @@ msgstr "Copie de rezervă reîncărcată"
 msgid "Remove currently selected palette"
 msgstr "Elimină paleta selectată în prezent"
 
+msgid "Are you sure you want to remove this palette? (Cannot be undone)"
+msgstr "Sigur vrei să elimini această paletă (nu va putea fi recuperată)?"
+
 msgid "You can't remove more palettes!"
 msgstr "Nu poți elimina mai multe palete!"
 
@@ -1445,4 +1499,22 @@ msgstr "A apărut o eroare la ștergerea paletei! Cod de eroare: %s"
 
 msgid "and"
 msgstr "și"
+
+msgid "Move the selected frame to the left."
+msgstr "Deplasează cadrul selectat la stânga."
+
+msgid "Move the selected frame to the right."
+msgstr "Deplasează cadrul selectat la dreapta."
+
+msgid "Frame duration"
+msgstr "Durata cadrului"
+
+msgid "Tiled In Both Axis"
+msgstr "Mozaicat pe ambele axe"
+
+msgid "Tiled In X Axis"
+msgstr "Mozaicat pe axa X"
+
+msgid "Tiled In Y Axis"
+msgstr "Mozaicat pe axa Y"
 
