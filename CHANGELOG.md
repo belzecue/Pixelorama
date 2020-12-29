@@ -4,10 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v0.8.2] - Unreleased
+
+## Unreleased
 This update has been brought to you by the contributions of:
 
-PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind, AbhinavKDev
+Laurenz Reinthaler (Schweini07)
+
+### Added
+- The FPS of the project animation is now stored in the pxo file.
+
+### Changed
+- CPU usage has been significantly been lowered when Pixelorama is idle. ([#394](https://github.com/Orama-Interactive/Pixelorama/pull/394))
+<br><br>
+
+## [v0.8.2] - 2020-12-12
+This update has been brought to you by the contributions of:
+
+PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind, AbhinavKDev, Laurenz Reinthaler (Schweini07)
 
 ### Added
 - The lighten/darken tool now has a hue shifting mode. It lets users configure the shift in hue, saturation and value of the new shaded pixels. ([#189](https://github.com/Orama-Interactive/Pixelorama/issues/189))
@@ -18,6 +31,8 @@ PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind, AbhinavKDev
 - HiDPI support - Pixelorama's UI can now be scaled in the Preferences. ([#140](https://github.com/Orama-Interactive/Pixelorama/issues/140))
 - More options have been added to Tile mode; Tile only in X Axis, Y Axis or both Axis. ([#378](https://github.com/Orama-Interactive/Pixelorama/pull/378))
 - Added a "Mirror View" option in the View menu, which is used to flip the canvas horizontally and non-destructively. ([#227](https://github.com/Orama-Interactive/Pixelorama/issues/227))
+- macOS: It is now possible to pan and zoom the canvas from a touchpad. ([#391](https://github.com/Orama-Interactive/Pixelorama/pull/391))
+- Added Turkish and Japanese translations.
 
 ### Changed
 - `~` is now used as a random brush prefix instead of `%`. ([#362](https://github.com/Orama-Interactive/Pixelorama/pull/362))
@@ -27,6 +42,7 @@ PinyaColada, Rémi Verschelde (akien-mga), dasimonde, gschwind, AbhinavKDev
 - Onion skinned previous and next frames are now being drawn on top of the current frame. This fixes issues where onion skinning would not work with an opaque background.
 - In onion skinning, you can now set the past and future steps to 0. ([#380](https://github.com/Orama-Interactive/Pixelorama/pull/380))
 - Tile mode is now project-specific. ([#388](https://github.com/Orama-Interactive/Pixelorama/pull/388))
+- macOS: Shortcuts with the Control keyboard button have now been changed to use "Command" instead. ([#393](https://github.com/Orama-Interactive/Pixelorama/pull/393))
 
 ### Fixed
 - Made .pxo saving safer. In case of a crash while parsing JSON data, the old .pxo file, if it exists, will no longer be overwritten and corrupted.

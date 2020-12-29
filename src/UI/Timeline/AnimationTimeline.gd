@@ -1,6 +1,5 @@
 extends Panel
 
-var fps := 6.0
 var animation_loop := 1 # 0 is no loop, 1 is cycle loop, 2 is ping-pong loop
 var animation_forward := true
 var first_frame := 0
@@ -8,13 +7,17 @@ var last_frame := 0
 
 var timeline_scroll : ScrollContainer
 var tag_scroll_container : ScrollContainer
+var fps_spinbox : SpinBox
 
 
 func _ready() -> void:
 	timeline_scroll = Global.find_node_by_name(self, "TimelineScroll")
 	tag_scroll_container = Global.find_node_by_name(self, "TagScroll")
+	fps_spinbox = find_node("FPSValue")
 	timeline_scroll.get_h_scrollbar().connect("value_changed", self, "_h_scroll_changed")
-	Global.animation_timer.wait_time = 1 / fps
+	yield(get_tree(), "idle_frame")
+	Global.animation_timer.wait_time = 1 / Global.current_project.fps
+	fps_spinbox.value = Global.current_project.fps
 
 
 func _h_scroll_changed(value : float) -> void:
@@ -24,11 +27,9 @@ func _h_scroll_changed(value : float) -> void:
 
 
 func add_frame() -> void:
-	var frame_duration : Array = Global.current_project.frame_duration.duplicate()
 	var frame : Frame = Global.canvas.new_empty_frame()
 	var new_frames : Array = Global.current_project.frames.duplicate()
 	var new_layers : Array = Global.current_project.layers.duplicate()
-	frame_duration.insert(Global.current_project.current_frame + 1, 1)
 	new_frames.insert(Global.current_project.current_frame + 1, frame)
 	# Loop through the array to create new classes for each element, so that they
 	# won't be the same as the original array's classes. Needed for undo/redo to work properly.
@@ -50,12 +51,10 @@ func add_frame() -> void:
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", Global.current_project.current_frame + 1)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frame_duration", frame_duration) #Add a 1 in the list of frame_duration
 
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame )
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "layers", Global.current_project.layers)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frame_duration", Global.current_project.frame_duration)
 	Global.current_project.undo_redo.commit_action()
 
 
@@ -65,8 +64,6 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 	if frame == -1:
 		frame = Global.current_project.current_frame
 
-	var frame_duration : Array = Global.current_project.frame_duration.duplicate()
-	frame_duration.remove(frame)
 	var frame_to_delete : Frame = Global.current_project.frames[frame]
 	var new_frames : Array = Global.current_project.frames.duplicate()
 	new_frames.erase(frame_to_delete)
@@ -113,13 +110,11 @@ func _on_DeleteFrame_pressed(frame := -1) -> void:
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", current_frame)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "animation_tags", new_animation_tags)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "layers", new_layers)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frame_duration", frame_duration) #Remove the element of the list of the frame selected
 
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", Global.current_project.current_frame)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "animation_tags", Global.current_project.animation_tags)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "layers", Global.current_project.layers)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frame_duration", Global.current_project.frame_duration)
 
 	Global.current_project.undo_redo.add_do_method(Global, "redo")
 	Global.current_project.undo_redo.add_undo_method(Global, "undo")
@@ -131,8 +126,6 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 		frame = Global.current_project.current_frame
 
 	var new_frame := Frame.new()
-	var frame_duration : Array = Global.current_project.frame_duration.duplicate()
-	frame_duration.insert(frame + 1, 1)
 	var new_frames := Global.current_project.frames.duplicate()
 	new_frames.insert(frame + 1, new_frame)
 
@@ -161,7 +154,6 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "frames", new_frames)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "current_frame", frame + 1)
 	Global.current_project.undo_redo.add_do_property(Global.current_project, "animation_tags", new_animation_tags)
-	Global.current_project.undo_redo.add_do_property(Global.current_project, "frame_duration", frame_duration)
 	for i in range(Global.current_project.layers.size()):
 		for child in Global.current_project.layers[i].frame_container.get_children():
 			Global.current_project.undo_redo.add_do_property(child, "pressed", false)
@@ -170,7 +162,6 @@ func _on_CopyFrame_pressed(frame := -1) -> void:
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frames", Global.current_project.frames)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "current_frame", frame)
 	Global.current_project.undo_redo.add_undo_property(Global.current_project, "animation_tags", Global.current_project.animation_tags)
-	Global.current_project.undo_redo.add_undo_property(Global.current_project, "frame_duration", Global.current_project.frame_duration)
 	Global.current_project.undo_redo.commit_action()
 
 
@@ -242,11 +233,12 @@ func _on_AnimationTimer_timeout() -> void:
 		$AnimationTimer.stop()
 		return
 
+	var fps = Global.current_project.fps
 	if animation_forward:
 		if Global.current_project.current_frame < last_frame:
 			Global.current_project.current_frame += 1
-			Global.animation_timer.wait_time = Global.current_project.frame_duration[Global.current_project.current_frame] * (1/fps)
-			Global.animation_timer.start() #Change the frame, change the wait time and start a cycle, this is the best way to do it
+			Global.animation_timer.wait_time = Global.current_project.frames[Global.current_project.current_frame].duration * (1/fps)
+			Global.animation_timer.start() # Change the frame, change the wait time and start a cycle, this is the best way to do it
 		else:
 			match animation_loop:
 				0: # No loop
@@ -255,7 +247,7 @@ func _on_AnimationTimer_timeout() -> void:
 					Global.animation_timer.stop()
 				1: # Cycle loop
 					Global.current_project.current_frame = first_frame
-					Global.animation_timer.wait_time = Global.current_project.frame_duration[Global.current_project.current_frame] * (1/fps)
+					Global.animation_timer.wait_time = Global.current_project.frames[Global.current_project.current_frame].duration * (1/fps)
 					Global.animation_timer.start()
 				2: # Ping pong loop
 					animation_forward = false
@@ -264,7 +256,7 @@ func _on_AnimationTimer_timeout() -> void:
 	else:
 		if Global.current_project.current_frame > first_frame:
 			Global.current_project.current_frame -= 1
-			Global.animation_timer.wait_time = Global.current_project.frame_duration[Global.current_project.current_frame] * (1/fps)
+			Global.animation_timer.wait_time = Global.current_project.frames[Global.current_project.current_frame].duration * (1/fps)
 			Global.animation_timer.start()
 		else:
 			match animation_loop:
@@ -274,7 +266,7 @@ func _on_AnimationTimer_timeout() -> void:
 					Global.animation_timer.stop()
 				1: # Cycle loop
 					Global.current_project.current_frame = last_frame
-					Global.animation_timer.wait_time = Global.current_project.frame_duration[Global.current_project.current_frame] * (1/fps)
+					Global.animation_timer.wait_time = Global.current_project.frames[Global.current_project.current_frame].duration * (1/fps)
 					Global.animation_timer.start()
 				2: # Ping pong loop
 					animation_forward = true
@@ -309,8 +301,10 @@ func play_animation(play : bool, forward_dir : bool) -> void:
 		Global.play_forward.connect("toggled", self, "_on_PlayForward_toggled")
 
 	if play:
-		Global.animation_timer.set_one_shot(true) #The wait_time it can't change correctly if it is playing
-		Global.animation_timer.wait_time = Global.current_project.frame_duration[Global.current_project.current_frame] * (1 / fps)
+		Global.animation_timer.set_one_shot(true) # The wait_time can't change correctly if it is playing
+		var duration : float = Global.current_project.frames[Global.current_project.current_frame].duration
+		var fps = Global.current_project.fps
+		Global.animation_timer.wait_time = duration * (1 / fps)
 		Global.animation_timer.start()
 		animation_forward = forward_dir
 	else:
@@ -336,8 +330,8 @@ func _on_FirstFrame_pressed() -> void:
 
 
 func _on_FPSValue_value_changed(value : float) -> void:
-	fps = float(value)
-	Global.animation_timer.wait_time = 1 / fps
+	Global.current_project.fps = float(value)
+	Global.animation_timer.wait_time = 1 / Global.current_project.fps
 
 
 func _on_PastOnionSkinning_value_changed(value : float) -> void:

@@ -40,7 +40,8 @@ signal color_changed(color, button)
 
 var _tools = {
 	"RectSelect" : "res://src/Tools/RectSelect.tscn",
-	"Zoom" : "res://src/Tools/Zoom.tscn",
+	"Zoom" : "res://src/Tools/Pan.tscn",
+	"Pan" : "res://src/Tools/Pan.tscn",
 	"ColorPicker" : "res://src/Tools/ColorPicker.tscn",
 	"Pencil" : "res://src/Tools/Pencil.tscn",
 	"Eraser" : "res://src/Tools/Eraser.tscn",
@@ -68,8 +69,12 @@ func _ready() -> void:
 	_tool_buttons = Global.find_node_by_name(Global.control, "ToolButtons")
 
 	var value = Global.config_cache.get_value(_slots[BUTTON_LEFT].kname, "tool", "Pencil")
+	if not value in _tools:
+		value = "Pencil"
 	set_tool(value, BUTTON_LEFT)
 	value = Global.config_cache.get_value(_slots[BUTTON_RIGHT].kname, "tool", "Eraser")
+	if not value in _tools:
+		value = "Eraser"
 	set_tool(value, BUTTON_RIGHT)
 	value = Global.config_cache.get_value(_slots[BUTTON_LEFT].kname, "color", Color.black)
 	assign_color(value, BUTTON_LEFT, false)

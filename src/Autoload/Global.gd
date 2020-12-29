@@ -452,6 +452,11 @@ Press %s to move the content""") % [InputMap.get_action_list("left_rectangle_sel
 %s for left mouse button
 %s for right mouse button""") % [InputMap.get_action_list("left_zoom_tool")[0].as_text(), InputMap.get_action_list("right_zoom_tool")[0].as_text()]
 
+	var pan_tool : BaseButton = find_node_by_name(root, "Pan")
+	pan_tool.hint_tooltip = tr("""Pan
+
+%s for left mouse button
+%s for right mouse button""") % [InputMap.get_action_list("left_pan_tool")[0].as_text(), InputMap.get_action_list("right_pan_tool")[0].as_text()]
 
 	var color_picker : BaseButton = find_node_by_name(root, "ColorPicker")
 	color_picker.hint_tooltip = tr("""Color Picker
@@ -516,7 +521,7 @@ Hold %s to make a line""") % [InputMap.get_action_list("left_eraser_tool")[0].as
 
 
 func is_cjk(locale : String) -> bool:
-	return "zh" in locale or "ko" in locale
+	return "zh" in locale or "ko" in locale or "ja" in locale
 
 
 func _exit_tree() -> void:
@@ -555,11 +560,11 @@ func update_recent_projects_submenu() -> void:
 		recent_projects_submenu.add_item(project.get_file())
 
 func use_osx_shortcuts() -> void:
-	var inputmap := InputMap 
-	
+	var inputmap := InputMap
+
 	for action in inputmap.get_actions():
-		var event : InputEvent = inputmap.get_action_list(action)[0] 
-		
+		var event : InputEvent = inputmap.get_action_list(action)[0]
+
 		if event.control:
 			event.control = false
 			event.command = true
