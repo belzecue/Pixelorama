@@ -2,16 +2,21 @@ class_name Canvas
 extends Node2D
 
 
-var location := Vector2.ZERO
 var fill_color := Color(0, 0, 0, 0)
 var current_pixel := Vector2.ZERO
 var can_undo := true
 var cursor_image_has_changed := false
 var sprite_changed_this_frame := false # for optimization purposes
+var move_preview_location := Vector2.ZERO
 
-onready var grid = $Grid
+onready var currently_visible_frame : Viewport = $CurrentlyVisibleFrame
+onready var current_frame_drawer = $CurrentlyVisibleFrame/CurrentFrameDrawer
 onready var tile_mode = $TileMode
+onready var pixel_grid = $PixelGrid
+onready var grid = $Grid
+onready var selection = $Selection
 onready var indicators = $Indicators
+onready var previews = $Previews
 
 
 # Called when the node enters the scene tree for the first time.
@@ -27,7 +32,7 @@ func _draw() -> void:
 	Global.small_preview_viewport.get_child(0).get_node("CanvasPreview").update()
 
 	var current_cels : Array = Global.current_project.frames[Global.current_project.current_frame].cels
-
+	var current_layer : int = Global.current_project.current_layer
 	var _position := position
 	var _scale := scale
 	if Global.mirror_view:
@@ -38,10 +43,15 @@ func _draw() -> void:
 	for i in range(Global.current_project.layers.size()):
 		var modulate_color := Color(1, 1, 1, current_cels[i].opacity)
 		if Global.current_project.layers[i].visible: # if it's visible
-			draw_texture(current_cels[i].image_texture, location, modulate_color)
+			if i == current_layer:
+				draw_texture(current_cels[i].image_texture, move_preview_location, modulate_color)
+			else:
+				draw_texture(current_cels[i].image_texture, Vector2.ZERO, modulate_color)
 
 	if Global.onion_skinning:
 		onion_skinning()
+	currently_visible_frame.size = Global.current_project.size
+	current_frame_drawer.update()
 	tile_mode.update()
 	draw_set_transform(position, rotation, scale)
 
@@ -61,7 +71,7 @@ func _input(event : InputEvent) -> void:
 	# value when shrink parameter is not equal to one. At godot version 3.2.3
 	var tmp_transform = get_canvas_transform().affine_inverse()
 	var tmp_position = Global.main_viewport.get_local_mouse_position()
-	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin + location
+	current_pixel = tmp_transform.basis_xform(tmp_position) + tmp_transform.origin
 
 	if Global.has_focus:
 		update()
@@ -210,13 +220,15 @@ func handle_redo(_action : String, project : Project = Global.current_project, l
 func update_texture(layer_index : int, frame_index := -1, project : Project = Global.current_project) -> void:
 	if frame_index == -1:
 		frame_index = project.current_frame
-	var current_cel : Cel = project.frames[frame_index].cels[layer_index]
-	current_cel.image_texture.create_from_image(current_cel.image, 0)
 
-	if project == Global.current_project:
-		var frame_texture_rect : TextureRect
-		frame_texture_rect = Global.find_node_by_name(project.layers[layer_index].frame_container.get_child(frame_index), "CelTexture")
-		frame_texture_rect.texture = current_cel.image_texture
+	if frame_index < project.frames.size() and layer_index < project.layers.size():
+		var current_cel : Cel = project.frames[frame_index].cels[layer_index]
+		current_cel.image_texture.create_from_image(current_cel.image, 0)
+
+		if project == Global.current_project:
+			var frame_texture_rect : TextureRect
+			frame_texture_rect = Global.find_node_by_name(project.layers[layer_index].frame_container.get_child(frame_index), "CelTexture")
+			frame_texture_rect.texture = current_cel.image_texture
 
 
 func onion_skinning() -> void:
@@ -233,7 +245,7 @@ func onion_skinning() -> void:
 				for layer in Global.current_project.frames[Global.current_project.current_frame - i].cels:
 					if Global.current_project.layers[layer_i].visible:
 						color.a = 0.6 / i
-						draw_texture(layer.image_texture, location, color)
+						draw_texture(layer.image_texture, Vector2.ZERO, color)
 					layer_i += 1
 
 	# Future
@@ -249,5 +261,5 @@ func onion_skinning() -> void:
 				for layer in Global.current_project.frames[Global.current_project.current_frame + i].cels:
 					if Global.current_project.layers[layer_i].visible:
 						color.a = 0.6 / i
-						draw_texture(layer.image_texture, location, color)
+						draw_texture(layer.image_texture, Vector2.ZERO, color)
 					layer_i += 1

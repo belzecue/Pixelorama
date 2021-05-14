@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2020-12-11 18:07\n"
+"PO-Revision-Date: 2021-04-17 10:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -38,6 +38,9 @@ msgstr "キャンバス サイズ"
 
 msgid "Frame Size"
 msgstr "フレームサイズ"
+
+msgid "Size"
+msgstr "サイズ"
 
 msgid "Width:"
 msgstr "幅:"
@@ -126,11 +129,20 @@ msgstr "削除"
 msgid "Scale Image"
 msgstr "画像の拡大縮小"
 
+msgid "Pixels"
+msgstr "ピクセル"
+
+msgid "Percentage"
+msgstr "割合"
+
 msgid "Crop Image"
 msgstr "画像のトリミング"
 
 msgid "Resize Canvas"
 msgstr "キャンバスサイズを変更"
+
+msgid "Centralize Image"
+msgstr "画像を中央に"
 
 msgid "Rotate Image"
 msgstr "画像を回転"
@@ -153,11 +165,29 @@ msgstr "設定"
 msgid "Tile Mode"
 msgstr "タイルモード"
 
+msgid "Window Transparency"
+msgstr "ウィンドウの透明度"
+
+msgid "Panel Layout"
+msgstr "パネルのレイアウト"
+
+msgid "Auto"
+msgstr "オート"
+
+msgid "Widescreen"
+msgstr "ワイドスクリーン"
+
+msgid "Tallscreen"
+msgstr "トールスクリーン"
+
 msgid "Mirror View"
 msgstr "ミラービュー"
 
 msgid "Show Grid"
 msgstr "グリッドを表示"
+
+msgid "Show Pixel Grid"
+msgstr "ピクセルグリッドを表示"
 
 msgid "Show Rulers"
 msgstr "ルーラーを表示"
@@ -198,8 +228,14 @@ msgstr "新しいタブ"
 msgid "Spritesheet (new tab)"
 msgstr "スプライトシート（新規タブ）"
 
+msgid "Spritesheet (new layer)"
+msgstr "スプライトシート (新規レイヤー)"
+
 msgid "New frame"
 msgstr "新しいフレーム"
+
+msgid "Replace frame"
+msgstr "フレームを置換"
 
 msgid "New layer"
 msgstr "新規レイヤー"
@@ -218,6 +254,15 @@ msgstr "水平フレーム:"
 
 msgid "Vertical frames:"
 msgstr "垂直フレーム"
+
+msgid "Start frame:"
+msgstr "開始フレーム:"
+
+msgid "At frame:"
+msgstr "すべてのフレーム:"
+
+msgid "At layer:"
+msgstr "レイヤーで:"
 
 msgid "Brush type:"
 msgstr "ブラシタイプ:"
@@ -383,6 +428,9 @@ msgstr "ショートカット"
 msgid "Backup"
 msgstr "バックアップ"
 
+msgid "Performance"
+msgstr "パフォーマンス"
+
 msgid "Indicators"
 msgstr "インジケーター"
 
@@ -418,6 +466,9 @@ msgstr "システム言語"
 
 msgid "Display Scale"
 msgstr "表示スケール"
+
+msgid "Dim interface on dialog popup"
+msgstr "ダイアログポップアップ時にインターフェースを薄暗くする"
 
 msgid "Dark"
 msgstr "ダーク"
@@ -548,11 +599,8 @@ msgstr "Pixelorama - 夢をピクセル化しよう!"
 msgid "Developed by Orama Interactive"
 msgstr "Developed by Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "Copyright 2019-2020 Orama Interactive and contributors"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©2019-2020 by Orama Interactive and contributors"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr "©2019-present by Orama Interactive and contributors"
 
 msgid "Website"
 msgstr "ウェブサイト"
@@ -708,6 +756,13 @@ msgstr "ズーム\n\n"
 "%sでマウスの左ボタンを ズーム に変更\n"
 "%sでマウスの右ボタンを ズーム に変更"
 
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr "パン\n\n"
+"%sでマウスの左ボタンを パン に変更\n"
+"%sでマウスの右ボタンを パン に変更"
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -751,6 +806,34 @@ msgid "Lighten/Darken\n\n"
 msgstr "明るく/暗く\n\n"
 "%sでマウスの左ボタンを 明るく/暗く に変更\n"
 "%sでマウスの右ボタンを 明るく/暗く に変更"
+
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "矩形ツール\n\n"
+"%sでマウスの左ボタンを 矩形ツール に変更\n"
+"%sでマウスの右ボタンを 矩形ツール に変更\n\n"
+"%sを長押しして正方形を作成\n"
+"%sを長押ししてクリックした場所を原点に図形を配置\n"
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr "楕円形ツール\n\n"
+"%sでマウスの左ボタンを 楕円形ツール に変更\n"
+"%sでマウスの右ボタンを 楕円形ツール に変更\n\n"
+"%sを長押しして真円を作成\n"
+"%sを長押ししてクリックした場所を原点に図形を配置\n"
+
+msgid "Rectangle"
+msgstr "矩形"
+
+msgid "Ellipse"
+msgstr "楕円形"
 
 msgid "Choose a color for the left tool"
 msgstr "左ツールの色を選択してくだ"
@@ -823,29 +906,68 @@ msgstr "アイソメトリック"
 msgid "All"
 msgstr "すべて"
 
-msgid "Grid width:"
-msgstr "グリッドの幅:"
+msgid "Rectangular grid width:"
+msgstr "矩形グリッドの幅:"
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "グリッドの垂直方向の線の距離を設定します。"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr "矩形グリッドの垂直方向の線の間隔を設定します"
 
-msgid "Grid height:"
-msgstr "グリッドの高さ:"
+msgid "Rectangular grid height:"
+msgstr "矩形グリッドの高さ:"
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "グリッドの水平方向の線の距離を設定します"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
+msgstr "矩形グリッドの水平方向の線の間隔を設定します"
 
-msgid "Isometric cell size:"
-msgstr "等角セルサイズ:"
+msgid "Isometric cell bounds width:"
+msgstr "等角セルの境界の幅:"
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "等角グリッドのセルのサイズを設定します"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr "等角セルの軸揃えの境界ボックスの幅を設定します"
+
+msgid "Isometric cell bounds height:"
+msgstr "等角セルの境界の高さ:"
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr "等角セルの軸揃えの境界ボックスの高さを設定します"
+
+msgid "Grid offset x:"
+msgstr "グリッドオフセット x:"
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr "キャンバスの原点 (画像の左上隅) からのグリッドの x オフセットを設定します。"
+
+msgid "Grid offset y:"
+msgstr "グリッドオフセット y:"
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr "キャンバスの原点 (画像の左上隅) からのグリッドの y オフセットを設定します。"
+
+msgid "Draw over Tile Mode:"
+msgstr "タイルモードの上に表示:"
+
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr "無効にすると、グリッドは元の画像の上にのみ描画されます"
 
 msgid "Grid color:"
 msgstr "グリッドの色:"
 
 msgid "A color of the grid"
 msgstr "グリッドの色"
+
+msgid "Pixel Grid"
+msgstr "ピクセルグリッド"
+
+msgid "Show at zoom:"
+msgstr "ズームで表示:"
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr "ピクセルが表示される最小のズームを設定します。"
+
+msgid "Pixel grid color:"
+msgstr "ピクセルグリッドの色:"
+
+msgid "A color of the pixel grid"
+msgstr "ピクセルグリッドの色"
 
 msgid "Transparency"
 msgstr "透明度"
@@ -883,6 +1005,18 @@ msgstr "透明なチェッカーはキャンバスのズームレベルに従い
 msgid "Only custom preset can be modified"
 msgstr "カスタムプリセットのみ変更できます"
 
+msgid "Set application FPS limit:"
+msgstr "アプリのFPS上限を設定:"
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr "アプリがフォーカスを失った場合、FPSを1に制限する"
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr "アプリケーションのフレーム/秒の制限を設定します。 数値が低いほどCPU使用率が低くなりますが、アプリケーションが遅く、粗く、応答がなくなります。0は制限がないことを意味します。"
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr "これをオンにすると、アプリケーションのウィンドウがフォーカスを失った場合のアプリケーションのFPS制限が1に設定されます。 これはアイドル時のCPU使用率を低下させるのに役立ちます。マウスがアプリケーションのウィンドウに入ったときにFPS制限がリセットされます。"
+
 msgid "Brush:"
 msgstr "ブラシ："
 
@@ -915,6 +1049,12 @@ msgstr "ピクセルパーフェクト"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "エッジの余分なピクセルを削除することで線を滑らかにします"
+
+msgid "Fill Shape"
+msgstr "図形の塗りつぶし"
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr "中が空の図形を描くのではなく、描画した図形を色で塗りつぶします"
 
 msgid "Brush color from"
 msgstr "ブラシの色"
@@ -1372,8 +1512,14 @@ msgstr "既定の塗りつぶしの色:"
 msgid "A default background color of a new image"
 msgstr "新しい画像の既定の背景色"
 
-msgid "Lock aspect ratio:"
-msgstr "アスペクト比をロック:"
+msgid "Lock aspect ratio"
+msgstr "アスペクト比をロック"
+
+msgid "Portrait"
+msgstr "縦"
+
+msgid "Landscape"
+msgstr "横"
 
 msgid "Templates:"
 msgstr "テンプレート:"
@@ -1395,6 +1541,9 @@ msgstr "矩形選択"
 
 msgid "Zoom"
 msgstr "ズーム"
+
+msgid "Pan"
+msgstr "パン"
 
 msgid "Color Picker"
 msgstr "カラーピッカー"
@@ -1520,4 +1669,40 @@ msgstr "X軸にタイルされています"
 
 msgid "Tiled In Y Axis"
 msgstr "Y軸にタイルされています"
+
+msgid "Create a new palette"
+msgstr "新しいパレットを作成"
+
+msgid "Create New Palette"
+msgstr "新しい空のパレットを作成しますか"
+
+msgid "Comment:"
+msgstr "コメント:"
+
+msgid "Empty"
+msgstr "空"
+
+msgid "From Current Palette"
+msgstr "現在のパレットから"
+
+msgid "From Current Sprite"
+msgstr "現在のスプライトから"
+
+msgid "From Current Selection"
+msgstr "現在の選択範囲から"
+
+msgid "Add a new color"
+msgstr "新しい色を追加"
+
+msgid "Remove a selected color"
+msgstr "選択した色を削除"
+
+msgid "Palette with the same name and path already exists!"
+msgstr "同じ名前とパスを持つパレットが既に存在します！"
+
+msgid "Palette name is required!"
+msgstr "パレット名が必要です！"
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr "パレットサイズを小さくすると、色の位置がリセットされます。新しいパレットサイズに合わない色は失われます！"
 

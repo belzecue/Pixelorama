@@ -1,10 +1,10 @@
-extends "res://src/Tools/Base.gd"
+extends BaseTool
 
 
 var _color_slot := 0
 
 
-func _on_Options_item_selected(id):
+func _on_Options_item_selected(id : int) -> void:
 	_color_slot = id
 	update_config()
 	save_config()
@@ -47,5 +47,6 @@ func _pick_color(position : Vector2) -> void:
 
 	image.lock()
 	var color := image.get_pixelv(position)
+	image.unlock()
 	var button := BUTTON_LEFT if _color_slot == 0 else BUTTON_RIGHT
 	Tools.assign_color(color, button, false)

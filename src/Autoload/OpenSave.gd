@@ -23,8 +23,8 @@ func handle_loading_files(files : PoolStringArray) -> void:
 		var file_ext : String = file.get_extension().to_lower()
 		if file_ext == "pxo": # Pixelorama project file
 			open_pxo_file(file)
-		elif file_ext == "json" or file_ext == "gpl" or file_ext == "pal": # Palettes
-			Global.palette_container.on_palette_import_file_selected(file)
+		elif file_ext == "tres" or file_ext == "gpl" or file_ext == "pal" or file_ext == "json": # Palettes
+			Palettes.import_palette(file)
 		else: # Image files
 			var image := Image.new()
 			var err := image.load(file)
@@ -46,7 +46,7 @@ func handle_loading_image(file : String, image : Image) -> void:
 	Global.dialog_open(true)
 
 
-func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
+func open_pxo_file(path : String, untitled_backup : bool = false, replace_empty : bool = true) -> void:
 	var file := File.new()
 	var err := file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
 	if err == ERR_FILE_UNRECOGNIZED:
@@ -59,7 +59,7 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		file.close()
 		return
 
-	var empty_project : bool = Global.current_project.frames.size() == 1 and Global.current_project.layers.size() == 1 and Global.current_project.frames[0].cels[0].image.is_invisible() and Global.current_project.animation_tags.size() == 0
+	var empty_project : bool = Global.current_project.is_empty() and replace_empty
 	var new_project : Project
 	if empty_project:
 		new_project = Global.current_project
@@ -119,8 +119,8 @@ func open_pxo_file(path : String, untitled_backup : bool = false) -> void:
 		new_project.directory_path = Export.directory_path
 		new_project.file_name = Export.file_name
 		Export.was_exported = false
-		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % path.get_file())
-		Global.file_menu.get_popup().set_item_text(6, tr("Export"))
+		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
+		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 
 	Global.save_project_to_recent_list(path)
 
@@ -271,6 +271,8 @@ func open_old_pxo_file(file : File, new_project : Project, first_line : String) 
 
 
 func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true, project : Project = Global.current_project) -> void:
+	if !autosave:
+		project.name = path.get_file()
 	var serialized_data = project.serialize()
 	if !serialized_data:
 		Global.error_dialog.set_text(tr("File failed to save. Converting project data to dictionary failed."))
@@ -299,7 +301,6 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 		return
 
 	if !autosave:
-		project.name = path.get_file()
 		current_save_paths[Global.current_project_index] = path
 
 	file.store_line(to_save)
@@ -339,7 +340,7 @@ func save_pxo_file(path : String, autosave : bool, use_zstd_compression := true,
 		Export.directory_path = path.get_base_dir()
 		Export.was_exported = false
 		project.was_exported = false
-		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % path.get_file())
+		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % path.get_file())
 
 	Global.save_project_to_recent_list(path)
 
@@ -358,7 +359,7 @@ func open_image_as_new_tab(path : String, image : Image) -> void:
 	set_new_tab(project, path)
 
 
-func open_image_as_spritesheet(path : String, image : Image, horizontal : int, vertical : int) -> void:
+func open_image_as_spritesheet_tab(path : String, image : Image, horizontal : int, vertical : int) -> void:
 	var project = Project.new([], path.get_file())
 	project.layers.append(Layer.new())
 	Global.projects.append(project)
@@ -386,6 +387,69 @@ func open_image_as_spritesheet(path : String, image : Image, horizontal : int, v
 			project.frames.append(frame)
 
 	set_new_tab(project, path)
+
+
+func open_image_as_spritesheet_layer(_path : String, image : Image, file_name : String, horizontal : int, vertical : int, start_frame : int) -> void:
+	# data needed to slice images
+	horizontal = min(horizontal, image.get_size().x)
+	vertical = min(vertical, image.get_size().y)
+	var frame_width := image.get_size().x / horizontal
+	var frame_height := image.get_size().y / vertical
+
+	# resize canvas to if "frame_width" or "frame_height" is too large
+	var project_width :int = max(frame_width, Global.current_project.size.x)
+	var project_height :int = max(frame_height, Global.current_project.size.y)
+	DrawingAlgos.resize_canvas(project_width, project_height,0 ,0)
+
+	# slice images
+	var image_no :int = 0
+	for yy in range(vertical):
+		for xx in range(horizontal):
+			var cropped_image := Image.new()
+			cropped_image = image.get_rect(Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height))
+			if (start_frame + (image_no)) < Global.current_project.frames.size():
+				# if frames are already present then fill those first
+				if image_no == 0:
+					open_image_as_new_layer(cropped_image, file_name, start_frame + image_no)
+				else:
+					open_image_at_frame(cropped_image, Global.current_project.layers.size() - 1, start_frame + image_no)
+			else:
+				# if no more frames are present then start making new frames
+				open_image_as_new_frame(cropped_image, Global.current_project.layers.size() - 1)
+			image_no += 1
+
+
+func open_image_at_frame(image : Image, layer_index := 0, frame_index := 0) -> void:
+	var project = Global.current_project
+	image.crop(project.size.x, project.size.y)
+
+	project.undos += 1
+	project.undo_redo.create_action("Replaced Frame")
+
+	var frames :Array = []
+	# create a duplicate of "project.frames"
+	for i in project.frames.size():
+		var frame := Frame.new()
+		frame.cels = project.frames[i].cels.duplicate(true)
+		frames.append(frame)
+
+	for i in project.frames.size():
+		if i == frame_index:
+			image.convert(Image.FORMAT_RGBA8)
+			image.lock()
+			frames[i].cels[layer_index] = (Cel.new(image, 1))
+			project.undo_redo.add_do_property(project.frames[i], "cels", frames[i].cels)
+			project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
+
+	project.undo_redo.add_do_property(project, "frames", frames)
+	project.undo_redo.add_do_property(project, "current_frame", frame_index)
+
+	project.undo_redo.add_undo_property(project, "frames", project.frames)
+	project.undo_redo.add_undo_property(project, "current_frame", project.current_frame)
+
+	project.undo_redo.add_do_method(Global, "redo")
+	project.undo_redo.add_undo_method(Global, "undo")
+	project.undo_redo.commit_action()
 
 
 func open_image_as_new_frame(image : Image, layer_index := 0) -> void:
@@ -444,6 +508,7 @@ func open_image_as_new_layer(image : Image, file_name : String, frame_index := 0
 
 		project.undo_redo.add_do_property(project.frames[i], "cels", new_cels)
 		project.undo_redo.add_undo_property(project.frames[i], "cels", project.frames[i].cels)
+
 
 	new_layers.append(layer)
 
@@ -529,23 +594,25 @@ func remove_backup_by_path(project_path : String, backup_path : String) -> void:
 
 
 func reload_backup_file(project_paths : Array, backup_paths : Array) -> void:
+	assert(project_paths.size() == backup_paths.size())
 	# Clear non-existant backups
-	var deleted_backup_paths := []
+	var existing_backups_count := 0
 	var dir := Directory.new()
-	for backup in backup_paths:
-		if !dir.file_exists(backup):
-			if Global.config_cache.has_section_key("backups", backup):
-				Global.config_cache.erase_section_key("backups", backup)
+	for i in range(backup_paths.size()):
+		if dir.file_exists(backup_paths[i]):
+			project_paths[existing_backups_count] = project_paths[i]
+			backup_paths[existing_backups_count] = backup_paths[i]
+			existing_backups_count += 1
+		else:
+			if Global.config_cache.has_section_key("backups", backup_paths[i]):
+				Global.config_cache.erase_section_key("backups", backup_paths[i])
 				Global.config_cache.save("user://cache.ini")
-			project_paths.remove(backup_paths.find(backup))
-			deleted_backup_paths.append(backup)
-
-	for deleted in deleted_backup_paths:
-		backup_paths.erase(deleted)
+	project_paths.resize(existing_backups_count)
+	backup_paths.resize(existing_backups_count)
 
 	# Load the backup files
 	for i in range(project_paths.size()):
-		open_pxo_file(backup_paths[i], project_paths[i] == backup_paths[i])
+		open_pxo_file(backup_paths[i], project_paths[i] == backup_paths[i], i == 0)
 		backup_save_paths[i] = backup_paths[i]
 
 		# If project path is the same as backup save path -> the backup was untitled

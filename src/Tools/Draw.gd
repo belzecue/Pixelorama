@@ -1,4 +1,4 @@
-extends "res://src/Tools/Base.gd"
+extends BaseTool
 
 
 var _brush := Brushes.get_default_brush()
@@ -100,7 +100,6 @@ func update_brush() -> void:
 			else:
 				var random = randi() % _brush.random.size()
 				_brush_image = _create_blended_brush_image(_brush.random[random])
-			_brush_image.lock()
 			_brush_texture.create_from_image(_brush_image, 0)
 			update_mirror_brush()
 	_indicator = _create_brush_indicator()
@@ -114,7 +113,6 @@ func update_random_image() -> void:
 		return
 	var random = randi() % _brush.random.size()
 	_brush_image = _create_blended_brush_image(_brush.random[random])
-	_brush_image.lock()
 	_brush_texture.create_from_image(_brush_image, 0)
 	_indicator = _create_brush_indicator()
 	update_mirror_brush()
@@ -129,12 +127,14 @@ func update_mirror_brush() -> void:
 	_mirror_brushes.xy.flip_y()
 
 
-func update_mask() -> void:
+func update_mask(can_skip := true) -> void:
+	if can_skip and Global.pressure_sensitivity_mode == Global.PressureSensitivity.NONE:
+		return
 	var size := _get_draw_image().get_size()
-	_mask = PoolByteArray()
-	_mask.resize(size.x * size.y)
-	for i in _mask.size():
-		_mask[i] = 0
+	# Faster than zeroing PoolByteArray directly. See: https://github.com/Orama-Interactive/Pixelorama/pull/439
+	var nulled_array := []
+	nulled_array.resize(size.x * size.y)
+	_mask = PoolByteArray(nulled_array)
 
 
 func update_line_polylines(start : Vector2, end : Vector2) -> void:
@@ -177,10 +177,10 @@ func commit_undo(action : String) -> void:
 
 
 func draw_tool(position : Vector2) -> void:
-	if Global.current_project.layers[Global.current_project.current_layer].locked:
+	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	var strength := _strength
-	if Global.pressure_sensitivity_mode == Global.Pressure_Sensitivity.ALPHA:
+	if Global.pressure_sensitivity_mode == Global.PressureSensitivity.ALPHA:
 		strength *= Tools.pen_pressure
 
 	_drawer.pixel_perfect = tool_slot.pixel_perfect if _brush_size == 1 else false
@@ -257,11 +257,10 @@ func draw_tool_circle(position : Vector2, fill := false) -> void:
 
 
 func draw_tool_brush(position : Vector2) -> void:
-	if Global.mirror_view:
-		position.x = Global.current_project.size.x - position.x
+	var project : Project = Global.current_project
 
-	if Global.current_project.tile_mode and _get_tile_mode_rect().has_point(position):
-		position = position.posmodv(Global.current_project.size)
+	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
+		position = position.posmodv(project.size)
 
 	var size := _brush_image.get_size()
 	var dst := position - (size / 2).floor()
@@ -272,42 +271,50 @@ func draw_tool_brush(position : Vector2) -> void:
 		return
 	var src_rect := Rect2(dst_rect.position - dst, dst_rect.size)
 	dst = dst_rect.position
-
-	var project : Project = Global.current_project
-	_draw_brush_image(_brush_image, src_rect, dst)
+	var brush_image : Image = remove_unselected_parts_of_brush(_brush_image, dst)
+	_draw_brush_image(brush_image, src_rect, dst)
 
 	# Handle Mirroring
 	var mirror_x = (project.x_symmetry_point + 1) - dst.x - src_rect.size.x
 	var mirror_y = (project.y_symmetry_point + 1) - dst.y - src_rect.size.y
-	var mirror_x_inside : bool
-	var mirror_y_inside : bool
-	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y
-	if entire_image_selected:
-		mirror_x_inside = mirror_x >= 0 and mirror_x < project.size.x
-		mirror_y_inside = mirror_y >= 0 and mirror_y < project.size.y
-	else:
-		var selected_pixels_x := []
-		var selected_pixels_y := []
-		for i in project.selected_pixels:
-			selected_pixels_x.append(i.x)
-			selected_pixels_y.append(i.y)
 
-		mirror_x_inside = mirror_x in selected_pixels_x
-		mirror_y_inside = mirror_y in selected_pixels_y
+	if tool_slot.horizontal_mirror:
+		var x_dst := Vector2(mirror_x, dst.y)
+		var mirror_brush_x : Image = remove_unselected_parts_of_brush(_mirror_brushes.x, x_dst)
+		_draw_brush_image(mirror_brush_x, _flip_rect(src_rect, size, true, false), x_dst)
+		if tool_slot.vertical_mirror:
+			var xy_dst := Vector2(mirror_x, mirror_y)
+			var mirror_brush_xy : Image = remove_unselected_parts_of_brush(_mirror_brushes.xy, xy_dst)
+			_draw_brush_image(mirror_brush_xy, _flip_rect(src_rect, size, true, true), xy_dst)
+	if tool_slot.vertical_mirror:
+		var y_dst := Vector2(dst.x, mirror_y)
+		var mirror_brush_y : Image = remove_unselected_parts_of_brush(_mirror_brushes.y, y_dst)
+		_draw_brush_image(mirror_brush_y, _flip_rect(src_rect, size, false, true), y_dst)
 
-	if tool_slot.horizontal_mirror and mirror_x_inside:
-		_draw_brush_image(_mirror_brushes.x, _flip_rect(src_rect, size, true, false), Vector2(mirror_x, dst.y))
-		if tool_slot.vertical_mirror and mirror_y_inside:
-			_draw_brush_image(_mirror_brushes.xy, _flip_rect(src_rect, size, true, true), Vector2(mirror_x, mirror_y))
-	if tool_slot.vertical_mirror and mirror_y_inside:
-		_draw_brush_image(_mirror_brushes.y, _flip_rect(src_rect, size, false, true), Vector2(dst.x, mirror_y))
+
+func remove_unselected_parts_of_brush(brush : Image, dst : Vector2) -> Image:
+	var project : Project = Global.current_project
+	if !project.has_selection:
+		return brush
+	var size := brush.get_size()
+	var new_brush := Image.new()
+	new_brush.copy_from(brush)
+
+	new_brush.lock()
+	for x in size.x:
+		for y in size.y:
+			var pos := Vector2(x, y) + dst
+			if !project.selection_bitmap.get_bit(pos):
+				new_brush.set_pixel(x, y, Color(0))
+	new_brush.unlock()
+	return new_brush
 
 
 func draw_indicator() -> void:
 	draw_indicator_at(_cursor, Vector2.ZERO, Color.blue)
-	if Global.current_project.tile_mode and _get_tile_mode_rect().has_point(_cursor):
+	if Global.current_project.tile_mode and Global.current_project.get_tile_mode_rect().has_point(_cursor):
 		var tile := _line_start if _draw_line else _cursor
-		if not tile in Global.current_project.selected_pixels:
+		if not Global.current_project.tile_mode_rects[Global.TileMode.NONE].has_point(tile):
 			var offset := tile - tile.posmodv(Global.current_project.size)
 			draw_indicator_at(_cursor, offset, Color.green)
 
@@ -334,23 +341,19 @@ func draw_indicator_at(position : Vector2, offset : Vector2, color : Color) -> v
 
 func _set_pixel(position : Vector2) -> void:
 	var project : Project = Global.current_project
-	if Global.mirror_view:
-		position.x = project.size.x - position.x - 1
-	if Global.current_project.tile_mode and _get_tile_mode_rect().has_point(position):
+	if project.tile_mode and project.get_tile_mode_rect().has_point(position):
 		position = position.posmodv(project.size)
 
-	var entire_image_selected : bool = project.selected_pixels.size() == project.size.x * project.size.y
-	if entire_image_selected:
-		if not _get_draw_rect().has_point(position):
-			return
-	else:
-		if not position in project.selected_pixels:
-			return
+	if !project.can_pixel_get_drawn(position):
+		return
 
 	var image := _get_draw_image()
 	var i := int(position.x + position.y * image.get_size().x)
-	if _mask[i] < Tools.pen_pressure:
-		_mask[i] = Tools.pen_pressure
+	if _mask.size() >= i + 1:
+		if _mask[i] < Tools.pen_pressure:
+			_mask[i] = Tools.pen_pressure
+			_drawer.set_pixel(image, position, tool_slot.color)
+	else:
 		_drawer.set_pixel(image, position, tool_slot.color)
 
 
@@ -363,7 +366,6 @@ func _create_blended_brush_image(image : Image) -> Image:
 	var brush := Image.new()
 	brush.copy_from(image)
 	brush = _blend_image(brush, tool_slot.color, _brush_interpolate / 100.0)
-	brush.unlock()
 	brush.resize(size.x, size.y, Image.INTERPOLATE_NEAREST)
 	return brush
 
@@ -378,6 +380,7 @@ func _blend_image(image : Image, color : Color, factor : float) -> Image:
 				var color_new := color_old.linear_interpolate(color, factor)
 				color_new.a = color_old.a
 				image.set_pixel(x, y, color_new)
+	image.unlock()
 	return image
 
 
@@ -394,9 +397,9 @@ func _create_brush_indicator() -> BitMap:
 
 
 func _create_image_indicator(image : Image) -> BitMap:
-			var bitmap := BitMap.new()
-			bitmap.create_from_image_alpha(image, 0.0)
-			return bitmap
+	var bitmap := BitMap.new()
+	bitmap.create_from_image_alpha(image, 0.0)
+	return bitmap
 
 
 func _create_pixel_indicator(size : int) -> BitMap:

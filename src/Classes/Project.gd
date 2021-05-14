@@ -1,11 +1,11 @@
 class_name Project extends Reference
 # A class for project properties.
 
-
 var name := "" setget name_changed
 var size : Vector2 setget size_changed
 var undo_redo : UndoRedo
-var tile_mode : int = Global.Tile_Mode.NONE
+var tile_mode : int = Global.TileMode.NONE
+var tile_mode_rects := [] # Cached to avoid recalculation
 var undos := 0 # The number of times we added undo properties
 var has_changed := false setget has_changed_changed
 var frames := [] setget frames_changed # Array of Frames (that contain Cels)
@@ -22,8 +22,10 @@ var y_symmetry_point
 var x_symmetry_axis : SymmetryGuide
 var y_symmetry_axis : SymmetryGuide
 
-var selected_pixels := []
-var selected_rect := Rect2(0, 0, 0, 0) setget _set_selected_rect
+var selection_bitmap := BitMap.new()
+# This is useful for when the selection is outside of the canvas boundaries, on the left and/or above (negative coords)
+var selection_offset := Vector2.ZERO setget _selection_offset_changed
+var has_selection := false
 
 # For every camera (currently there are 3)
 var cameras_zoom := [Vector2(0.15, 0.15), Vector2(0.15, 0.15), Vector2(0.15, 0.15)] # Array of Vector2
@@ -40,7 +42,8 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 	frames = _frames
 	name = _name
 	size = _size
-	select_all_pixels()
+	selection_bitmap.create(size)
+	update_tile_mode_rects()
 
 	undo_redo = UndoRedo.new()
 
@@ -73,20 +76,33 @@ func _init(_frames := [], _name := tr("untitled"), _size := Vector2(64, 64)) -> 
 		directory_path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 
 
-func select_all_pixels() -> void:
-	clear_selection()
-	for x in size.x:
-		for y in size.y:
-			selected_pixels.append(Vector2(x, y))
+func commit_undo() -> void:
+	if Global.canvas.selection.is_moving_content:
+		Global.canvas.selection.transform_content_cancel()
+	else:
+		undo_redo.undo()
 
 
-func clear_selection() -> void:
-	selected_pixels.clear()
+func commit_redo() -> void:
+	Global.control.redone = true
+	undo_redo.redo()
+	Global.control.redone = false
 
 
-func _set_selected_rect(value : Rect2) -> void:
-	selected_rect = value
-	Global.selection_rectangle.set_rect(value)
+func selection_bitmap_changed() -> void:
+	var image := Image.new()
+	var image_texture := ImageTexture.new()
+	has_selection = selection_bitmap.get_true_bit_count() > 0
+	if has_selection:
+		image = bitmap_to_image(selection_bitmap)
+		image_texture.create_from_image(image, 0)
+	Global.canvas.selection.marching_ants_outline.texture = image_texture
+
+
+func _selection_offset_changed(value : Vector2) -> void:
+	selection_offset = value
+	Global.canvas.selection.marching_ants_outline.offset = selection_offset
+	Global.canvas.selection.update_on_zoom(Global.camera.zoom.x)
 
 
 func change_project() -> void:
@@ -125,7 +141,7 @@ func change_project() -> void:
 
 	for j in range(frames.size()): # Create frame ID labels
 		var label := Label.new()
-		label.rect_min_size.x = 36
+		label.rect_min_size.x = Global.animation_timeline.cel_size
 		label.align = Label.ALIGN_CENTER
 		label.text = str(j + 1)
 		if j == current_frame:
@@ -145,9 +161,6 @@ func change_project() -> void:
 
 	self.animation_tags = animation_tags
 
-	# Change the selection rectangle
-	Global.selection_rectangle.set_rect(selected_rect)
-
 	# Change the guides
 	for guide in Global.canvas.get_children():
 		if guide is Guide:
@@ -166,21 +179,12 @@ func change_project() -> void:
 	for brush in brushes:
 		Brushes.add_project_brush(brush)
 
-	var cameras = [Global.camera, Global.camera2, Global.camera_preview]
-	var i := 0
-	for camera in cameras:
-		camera.zoom = cameras_zoom[i]
-		camera.offset = cameras_offset[i]
-		i += 1
-	Global.zoom_level_label.text = str(round(100 / Global.camera.zoom.x)) + " %"
 	Global.canvas.update()
-	Global.canvas.grid.isometric_polylines.clear()
 	Global.canvas.grid.update()
 	Global.transparent_checker._ready()
 	Global.animation_timeline.fps_spinbox.value = fps
 	Global.horizontal_ruler.update()
 	Global.vertical_ruler.update()
-	Global.preview_zoom_slider.value = -Global.camera_preview.zoom.x
 	Global.cursor_position_label.text = "[%s×%s]" % [size.x, size.y]
 
 	Global.window_title = "%s - Pixelorama %s" % [name, Global.current_version]
@@ -191,9 +195,9 @@ func change_project() -> void:
 	if save_path != "":
 		Global.open_sprites_dialog.current_path = save_path
 		Global.save_sprites_dialog.current_path = save_path
-		Global.file_menu.get_popup().set_item_text(4, tr("Save") + " %s" % save_path.get_file())
+		Global.top_menu_container.file_menu.set_item_text(4, tr("Save") + " %s" % save_path.get_file())
 	else:
-		Global.file_menu.get_popup().set_item_text(4, tr("Save"))
+		Global.top_menu_container.file_menu.set_item_text(4, tr("Save"))
 
 	Export.directory_path = directory_path
 	Export.file_name = file_name
@@ -201,16 +205,26 @@ func change_project() -> void:
 	Export.was_exported = was_exported
 
 	if !was_exported:
-		Global.file_menu.get_popup().set_item_text(6, tr("Export"))
+		Global.top_menu_container.file_menu.set_item_text(6, tr("Export"))
 	else:
-		Global.file_menu.get_popup().set_item_text(6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
+		Global.top_menu_container.file_menu.set_item_text(6, tr("Export") + " %s" % (file_name + Export.file_format_string(file_format)))
 
-	for j in range(len(Global.Tile_Mode)):
-		if j != tile_mode:
-			Global.tile_mode_submenu.set_item_checked(j, false)
-		else:
-			Global.tile_mode_submenu.set_item_checked(j, true)
+	for j in Global.TileMode.values():
+		Global.tile_mode_submenu.set_item_checked(j, j == tile_mode)
 
+	# Change selection effect & bounding rectangle
+	Global.canvas.selection.marching_ants_outline.offset = selection_offset
+	selection_bitmap_changed()
+	Global.canvas.selection.big_bounding_rectangle = get_selection_rectangle()
+	Global.canvas.selection.big_bounding_rectangle.position += selection_offset
+	Global.canvas.selection.update()
+
+	var i := 0
+	for camera in [Global.camera, Global.camera2, Global.camera_preview]:
+		camera.zoom = cameras_zoom[i]
+		camera.offset = cameras_offset[i]
+		camera.zoom_changed()
+		i += 1
 
 
 func serialize() -> Dictionary:
@@ -295,7 +309,7 @@ func deserialize(dict : Dictionary) -> void:
 	if dict.has("size_x") and dict.has("size_y"):
 		size.x = dict.size_x
 		size.y = dict.size_y
-		select_all_pixels()
+		update_tile_mode_rects()
 	if dict.has("save_path"):
 		OpenSave.current_save_paths[Global.projects.find(self)] = dict.save_path
 	if dict.has("frames"):
@@ -344,10 +358,10 @@ func deserialize(dict : Dictionary) -> void:
 	if dict.has("symmetry_points"):
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]
-		x_symmetry_axis.points[0].y = floor(y_symmetry_point / 2 + 1)
-		x_symmetry_axis.points[1].y = floor(y_symmetry_point / 2 + 1)
-		y_symmetry_axis.points[0].x = floor(x_symmetry_point / 2 + 1)
-		y_symmetry_axis.points[1].x = floor(x_symmetry_point / 2 + 1)
+		for point in x_symmetry_axis.points:
+			point.y = floor(y_symmetry_point / 2 + 1)
+		for point in y_symmetry_axis.points:
+			point.x = floor(x_symmetry_point / 2 + 1)
 	if dict.has("export_directory_path"):
 		directory_path = dict.export_directory_path
 	if dict.has("export_file_name"):
@@ -365,8 +379,7 @@ func name_changed(value : String) -> void:
 
 func size_changed(value : Vector2) -> void:
 	size = value
-	if Global.selection_rectangle._selected_rect.has_no_area():
-		select_all_pixels()
+	update_tile_mode_rects()
 
 
 func frames_changed(value : Array) -> void:
@@ -382,7 +395,7 @@ func frames_changed(value : Array) -> void:
 
 	for j in range(frames.size()):
 		var label := Label.new()
-		label.rect_min_size.x = 36
+		label.rect_min_size.x = Global.animation_timeline.cel_size
 		label.align = Label.ALIGN_CENTER
 		label.text = str(j + 1)
 		Global.frame_ids.add_child(label)
@@ -443,12 +456,13 @@ func remove_cel_buttons() -> void:
 
 
 func frame_changed(value : int) -> void:
+	Global.canvas.selection.transform_content_confirm()
 	current_frame = value
 	Global.current_frame_mark_label.text = "%s/%s" % [str(current_frame + 1), frames.size()]
 
 	for i in frames.size():
 		var text_color := Color.white
-		if Global.theme_type == Global.Theme_Types.CARAMEL || Global.theme_type == Global.Theme_Types.LIGHT:
+		if Global.theme_type == Global.ThemeTypes.CARAMEL || Global.theme_type == Global.ThemeTypes.LIGHT:
 			text_color = Color.black
 		Global.frame_ids.get_child(i).add_color_override("font_color", text_color)
 		for layer in layers: # De-select all the other frames
@@ -465,15 +479,17 @@ func frame_changed(value : int) -> void:
 	Global.disable_button(Global.move_left_frame_button, frames.size() == 1 or current_frame == 0)
 	Global.disable_button(Global.move_right_frame_button, frames.size() == 1 or current_frame == frames.size() - 1)
 
+	if current_frame < frames.size():
+		Global.layer_opacity_slider.value = frames[current_frame].cels[current_layer].opacity * 100
+		Global.layer_opacity_spinbox.value = frames[current_frame].cels[current_layer].opacity * 100
+
 	Global.canvas.update()
 	Global.transparent_checker._ready() # To update the rect size
 
 
 func layer_changed(value : int) -> void:
+	Global.canvas.selection.transform_content_confirm()
 	current_layer = value
-	if current_frame < frames.size():
-		Global.layer_opacity_slider.value = frames[current_frame].cels[current_layer].opacity * 100
-		Global.layer_opacity_spinbox.value = frames[current_frame].cels[current_layer].opacity * 100
 
 	for container in Global.layers_container.get_children():
 		container.pressed = false
@@ -530,18 +546,19 @@ func animation_tags_changed(value : Array) -> void:
 		child.queue_free()
 
 	for tag in animation_tags:
-		var tag_c : Container = load("res://src/UI/Timeline/AnimationTag.tscn").instance()
+		var tag_base_size = Global.animation_timeline.cel_size + 3
+		var tag_c : Container = load("res://src/UI/Timeline/AnimationTagUI.tscn").instance()
 		Global.tag_container.add_child(tag_c)
+		tag_c.tag = tag
 		var tag_position : int = Global.tag_container.get_child_count() - 1
 		Global.tag_container.move_child(tag_c, tag_position)
 		tag_c.get_node("Label").text = tag.name
 		tag_c.get_node("Label").modulate = tag.color
 		tag_c.get_node("Line2D").default_color = tag.color
 
-		tag_c.rect_position.x = (tag.from - 1) * 39 + tag.from
-
+		tag_c.rect_position.x = (tag.from - 1) * tag_base_size + tag.from
 		var tag_size : int = tag.to - tag.from
-		tag_c.rect_min_size.x = (tag_size + 1) * 39
+		tag_c.rect_min_size.x = (tag_size + 1) * tag_base_size
 		tag_c.get_node("Line2D").points[2] = Vector2(tag_c.rect_min_size.x, 0)
 		tag_c.get_node("Line2D").points[3] = Vector2(tag_c.rect_min_size.x, 32)
 
@@ -567,3 +584,179 @@ func has_changed_changed(value : bool) -> void:
 		Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
 	else:
 		Global.tabs.set_tab_title(Global.tabs.current_tab, name)
+
+
+func get_tile_mode_rect() -> Rect2:
+	return tile_mode_rects[tile_mode]
+
+
+func update_tile_mode_rects() -> void:
+	tile_mode_rects.resize(Global.TileMode.size())
+	tile_mode_rects[Global.TileMode.NONE] = Rect2(Vector2.ZERO, size)
+	tile_mode_rects[Global.TileMode.BOTH] = Rect2(Vector2(-1, -1) * size, Vector2(3, 3) * size)
+	tile_mode_rects[Global.TileMode.X_AXIS] = Rect2(Vector2(-1, 0) * size, Vector2(3, 1) * size)
+	tile_mode_rects[Global.TileMode.Y_AXIS] = Rect2(Vector2(0, -1) * size, Vector2(1, 3) * size)
+
+
+func is_empty() -> bool:
+	return frames.size() == 1 and layers.size() == 1 and frames[0].cels[0].image.is_invisible() and animation_tags.size() == 0
+
+
+func can_pixel_get_drawn(pixel : Vector2) -> bool:
+	if pixel.x < 0 or pixel.y < 0 or pixel.x >= size.x or pixel.y >= size.y:
+		return false
+	var selection_position : Vector2 = Global.canvas.selection.big_bounding_rectangle.position
+	if selection_position.x < 0:
+		pixel.x -= selection_position.x
+	if selection_position.y < 0:
+		pixel.y -= selection_position.y
+	if has_selection:
+		return selection_bitmap.get_bit(pixel)
+	else:
+		return true
+
+
+func invert_bitmap(bitmap : BitMap) -> void:
+	for x in bitmap.get_size().x:
+		for y in bitmap.get_size().y:
+			var pos := Vector2(x, y)
+			bitmap.set_bit(pos, !bitmap.get_bit(pos))
+
+
+# Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L605
+func resize_bitmap(bitmap : BitMap, new_size : Vector2) -> BitMap:
+	if new_size == bitmap.get_size():
+		return bitmap
+	var new_bitmap := BitMap.new()
+	new_bitmap.create(new_size)
+	var lw = min(bitmap.get_size().x, new_size.x)
+	var lh = min(bitmap.get_size().y, new_size.y)
+	for x in lw:
+		for y in lh:
+			new_bitmap.set_bit(Vector2(x, y), bitmap.get_bit(Vector2(x, y)))
+
+	return new_bitmap
+
+
+# Unexposed BitMap class function - https://github.com/godotengine/godot/blob/master/scene/resources/bit_map.cpp#L622
+func bitmap_to_image(bitmap : BitMap, square := true) -> Image:
+	var image := Image.new()
+	var width := bitmap.get_size().x
+	var height := bitmap.get_size().y
+	if square:
+		var square_size = max(width, height)
+		image.create(square_size, square_size, false, Image.FORMAT_LA8)
+	else:
+		image.create(width, height, false, Image.FORMAT_LA8)
+	image.lock()
+	for x in width:
+		for y in height:
+			var pos := Vector2(x, y)
+			var color = Color(1, 1, 1, 1) if bitmap.get_bit(pos) else Color(0, 0, 0, 0)
+			image.set_pixelv(pos, color)
+	image.unlock()
+	return image
+
+
+func get_selection_rectangle(bitmap : BitMap = selection_bitmap) -> Rect2:
+	if bitmap.get_true_bit_count() == 0:
+		return Rect2()
+
+	var minx := 0xFFFFFF
+	var miny := 0xFFFFFF
+	var maxx := -1
+	var maxy := -1
+	for j in bitmap.get_size().y:
+		for i in bitmap.get_size().x:
+			if !bitmap.get_bit(Vector2(i, j)):
+				continue
+			if i > maxx:
+				maxx = i
+			if j > maxy:
+				maxy = j
+			if i < minx:
+				minx = i
+			if j < miny:
+				miny = j
+
+	if maxx == -1:
+		return Rect2()
+	else:
+		return Rect2(minx, miny, maxx - minx + 1, maxy - miny + 1)
+
+
+func move_bitmap_values(bitmap : BitMap, move_offset := true) -> void:
+	var selection_node = Global.canvas.selection
+	var selection_position : Vector2 = selection_node.big_bounding_rectangle.position
+	var selection_end : Vector2 = selection_node.big_bounding_rectangle.end
+
+	var image : Image = bitmap_to_image(bitmap)
+	var selection_rect := image.get_used_rect()
+	var smaller_image := image.get_rect(selection_rect)
+	image.fill(Color(0))
+	var dst := selection_position
+	var x_diff = selection_end.x - size.x
+	var y_diff = selection_end.y - size.y
+	var nw = max(size.x, size.x + x_diff)
+	var nh = max(size.y, size.y + y_diff)
+
+	if selection_position.x < 0:
+		nw -= selection_position.x
+		if move_offset:
+			self.selection_offset.x = selection_position.x
+		dst.x = 0
+	else:
+		if move_offset:
+			self.selection_offset.x = 0
+	if selection_position.y < 0:
+		nh -= selection_position.y
+		if move_offset:
+			self.selection_offset.y = selection_position.y
+		dst.y = 0
+	else:
+		if move_offset:
+			self.selection_offset.y = 0
+
+	if nw <= image.get_size().x:
+		nw = image.get_size().x
+	if nh <= image.get_size().y:
+		nh = image.get_size().y
+
+	image.crop(nw, nh)
+	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, Vector2(nw, nh)), dst)
+	bitmap.create_from_image_alpha(image)
+
+
+func resize_bitmap_values(bitmap : BitMap, new_size : Vector2, flip_x : bool, flip_y : bool) -> BitMap:
+	var selection_node = Global.canvas.selection
+	var selection_position : Vector2 = selection_node.big_bounding_rectangle.position
+	var dst := selection_position
+	var new_bitmap_size := size
+	new_bitmap_size.x = max(size.x, abs(selection_position.x) + new_size.x)
+	new_bitmap_size.y = max(size.y, abs(selection_position.y) + new_size.y)
+	var new_bitmap := BitMap.new()
+	var image : Image = bitmap_to_image(bitmap)
+	var selection_rect := image.get_used_rect()
+	var smaller_image := image.get_rect(selection_rect)
+	if selection_position.x <= 0:
+		self.selection_offset.x = selection_position.x
+		dst.x = 0
+	else:
+		self.selection_offset.x = 0
+	if selection_position.y <= 0:
+		self.selection_offset.y = selection_position.y
+		dst.y = 0
+	else:
+		self.selection_offset.y = 0
+	image.fill(Color(0))
+	smaller_image.resize(new_size.x, new_size.y, Image.INTERPOLATE_NEAREST)
+	if flip_x:
+		smaller_image.flip_x()
+	if flip_y:
+		smaller_image.flip_y()
+	if new_bitmap_size != size:
+		image.crop(new_bitmap_size.x, new_bitmap_size.y)
+	image.blit_rect(smaller_image, Rect2(Vector2.ZERO, new_bitmap_size), dst)
+	new_bitmap.create_from_image_alpha(image)
+
+	return new_bitmap

@@ -196,7 +196,7 @@ func export_processed_images(ignore_overwrites: bool, export_dialog: AcceptDialo
 	# Store settings for quick export and when the dialog is opened again
 	was_exported = true
 	Global.current_project.was_exported = true
-	Global.file_menu.get_popup().set_item_text(6, tr("Export") + " %s" % (file_name + file_format_string(file_format)))
+	Global.top_menu_container.file_menu.set_item_text(6, tr("Export") + " %s" % (file_name + file_format_string(file_format)))
 
 	# Only show when not exporting gif - gif export finishes in thread
 	if not (current_tab == ExportTab.ANIMATION and animation_type == AnimationType.ANIMATED):
@@ -320,7 +320,7 @@ func blend_layers(image : Image, frame : Frame, origin : Vector2 = Vector2(0, 0)
 						var pixel_color := cel_image.get_pixel(xx, yy)
 						var alpha : float = pixel_color.a * cel.opacity
 						cel_image.set_pixel(xx, yy, Color(pixel_color.r, pixel_color.g, pixel_color.b, alpha))
-			image.blend_rect(cel_image, Rect2(Global.canvas.location, Global.current_project.size), origin)
+			image.blend_rect(cel_image, Rect2(Vector2.ZERO, Global.current_project.size), origin)
 			cel_image.unlock()
 		layer_i += 1
 	image.unlock()

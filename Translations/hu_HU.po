@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2020-12-11 13:12\n"
+"PO-Revision-Date: 2021-04-16 18:10\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -38,6 +38,9 @@ msgstr "Vászon mérete"
 
 msgid "Frame Size"
 msgstr "Keretméret"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "Szélesség:"
@@ -126,11 +129,20 @@ msgstr "Törlés"
 msgid "Scale Image"
 msgstr "Kép átméretezése"
 
+msgid "Pixels"
+msgstr "Pixelek"
+
+msgid "Percentage"
+msgstr "Százalék"
+
 msgid "Crop Image"
 msgstr "Kép levágása"
 
 msgid "Resize Canvas"
 msgstr "Vászon átméretezése"
+
+msgid "Centralize Image"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "Kép forgatása"
@@ -153,11 +165,29 @@ msgstr "Beállítások"
 msgid "Tile Mode"
 msgstr "Csempe mód"
 
+msgid "Window Transparency"
+msgstr "Ablak átlátszóság"
+
+msgid "Panel Layout"
+msgstr "Lap elrendezés"
+
+msgid "Auto"
+msgstr "Automatikus"
+
+msgid "Widescreen"
+msgstr "Szélesvászon"
+
+msgid "Tallscreen"
+msgstr "Magasképernyő"
+
 msgid "Mirror View"
-msgstr ""
+msgstr "Tükör Nézet"
 
 msgid "Show Grid"
 msgstr "Rács megjelenítése"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "Vonalzók megjelenítése"
@@ -198,8 +228,14 @@ msgstr "Új lap"
 msgid "Spritesheet (new tab)"
 msgstr "Képsorozat (új ablak)"
 
+msgid "Spritesheet (new layer)"
+msgstr "Képsorozat (új réteg)"
+
 msgid "New frame"
 msgstr "Új képkocka"
+
+msgid "Replace frame"
+msgstr "Képkocka kicserélése"
 
 msgid "New layer"
 msgstr "Új réteg"
@@ -218,6 +254,15 @@ msgstr "Vízszintes képkockák:"
 
 msgid "Vertical frames:"
 msgstr "Függőleges képkockák:"
+
+msgid "Start frame:"
+msgstr "Kezdő képkocka:"
+
+msgid "At frame:"
+msgstr ""
+
+msgid "At layer:"
+msgstr ""
 
 msgid "Brush type:"
 msgstr "Ecset típus:"
@@ -383,6 +428,9 @@ msgstr "Gyorsbillentyűk"
 msgid "Backup"
 msgstr "Biztonsági mentés"
 
+msgid "Performance"
+msgstr "Teljesítmény"
+
 msgid "Indicators"
 msgstr "Indikátorok"
 
@@ -418,6 +466,9 @@ msgstr "Rendszer nyelv"
 
 msgid "Display Scale"
 msgstr "Skála megjelenítése"
+
+msgid "Dim interface on dialog popup"
+msgstr ""
 
 msgid "Dark"
 msgstr "Sötét"
@@ -548,11 +599,8 @@ msgstr "Pixelorama - Pixelate your dreams!"
 msgid "Developed by Orama Interactive"
 msgstr "Fejleszette: Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "Copyright 2019-2020 Orama Interactive és hozzáműködők"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©2019-2020 készítette Orama Interactive és hozzáműködők"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr "©2019-jelenleg készítette Orama Interactive és közreműködők"
 
 msgid "Website"
 msgstr "Weboldal"
@@ -642,7 +690,7 @@ msgid "Romanian"
 msgstr "Román"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Japán"
 
 msgid "Development Team"
 msgstr "Fejlesztő csapat"
@@ -708,6 +756,11 @@ msgstr "Nagyítás\n\n"
 "%s a bal egérgombbal\n"
 "%s a jobb egérgombbal"
 
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -751,6 +804,26 @@ msgid "Lighten/Darken\n\n"
 msgstr "Világosítás/Sötétítés\n\n"
 "%s a bal egérgombbal\n"
 "%s a jobb egérgombbal"
+
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
+msgstr ""
 
 msgid "Choose a color for the left tool"
 msgstr "Szín kiválasztása a bal eszközhöz"
@@ -823,22 +896,46 @@ msgstr "Izometrikus"
 msgid "All"
 msgstr "Mind"
 
-msgid "Grid width:"
-msgstr "Rács szélessége:"
+msgid "Rectangular grid width:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Beállítja, hogy a rács függőleges vonalai milyen távolságra legyenek egymástól"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr ""
 
-msgid "Grid height:"
-msgstr "Rács magassága:"
+msgid "Rectangular grid height:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the grid"
-msgstr "Beállítja, hogy a rács vízszintes vonalai milyen távolságra legyenek egymástól"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
+msgstr ""
 
-msgid "Isometric cell size:"
-msgstr "Izometrikus cella méret:"
+msgid "Isometric cell bounds width:"
+msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Grid offset x:"
+msgstr "Rács elállítása x tengelyen:"
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Grid offset y:"
+msgstr "Rács elállítása y tengelyen:"
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
 
 msgid "Grid color:"
@@ -846,6 +943,21 @@ msgstr "Rács színe:"
 
 msgid "A color of the grid"
 msgstr "A rács színe"
+
+msgid "Pixel Grid"
+msgstr "Pixel Rács"
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr "Pixelrács színe:"
+
+msgid "A color of the pixel grid"
+msgstr "A pixelrács színe"
 
 msgid "Transparency"
 msgstr "Átlátszóság"
@@ -883,6 +995,18 @@ msgstr "Az átlátszó négyzetháló követi a vászon nagyítási szintjét"
 msgid "Only custom preset can be modified"
 msgstr "Csak az egyedi beállítások módosíthatók"
 
+msgid "Set application FPS limit:"
+msgstr "Applikáció FPS limitjének beállítása:"
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr "FPS 1-re limitálása amikor az alkalmazás a háttérbe kerül"
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr ""
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
+
 msgid "Brush:"
 msgstr "Ecset:"
 
@@ -916,6 +1040,12 @@ msgstr "Pixel Perfect"
 msgid "Makes lines smooth by removing the extra pixels on the edges"
 msgstr "A vonalakat simává teszi azáltal, hogy eltávolítja a széleken lévő extra képpontokat"
 
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr ""
+
 msgid "Brush color from"
 msgstr "Ecset színből"
 
@@ -944,10 +1074,10 @@ msgid "Offset"
 msgstr "Eltolás"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Egyszerű árnyékolás"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Színárnyalat-váltás"
 
 msgid "Lighten"
 msgstr "Világosítás"
@@ -1372,8 +1502,14 @@ msgstr "Alapértelmezett kitöltő szín:"
 msgid "A default background color of a new image"
 msgstr "Alapértelmezett háttérszíne az új képnek"
 
-msgid "Lock aspect ratio:"
-msgstr "Méretarány lezárása:"
+msgid "Lock aspect ratio"
+msgstr "Méretarány lezárása"
+
+msgid "Portrait"
+msgstr "Álló"
+
+msgid "Landscape"
+msgstr "Fekvő"
 
 msgid "Templates:"
 msgstr "Sablonok:"
@@ -1395,6 +1531,9 @@ msgstr "Téglalap alakú kijelölés"
 
 msgid "Zoom"
 msgstr "Nagyít/kicsinyít"
+
+msgid "Pan"
+msgstr "Fordítás"
 
 msgid "Color Picker"
 msgstr "Színválasztó"
@@ -1519,5 +1658,41 @@ msgid "Tiled In X Axis"
 msgstr ""
 
 msgid "Tiled In Y Axis"
+msgstr ""
+
+msgid "Create a new palette"
+msgstr ""
+
+msgid "Create New Palette"
+msgstr ""
+
+msgid "Comment:"
+msgstr ""
+
+msgid "Empty"
+msgstr ""
+
+msgid "From Current Palette"
+msgstr ""
+
+msgid "From Current Sprite"
+msgstr ""
+
+msgid "From Current Selection"
+msgstr ""
+
+msgid "Add a new color"
+msgstr ""
+
+msgid "Remove a selected color"
+msgstr ""
+
+msgid "Palette with the same name and path already exists!"
+msgstr ""
+
+msgid "Palette name is required!"
+msgstr ""
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
 msgstr ""
 

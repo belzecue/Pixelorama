@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2020-12-11 13:12\n"
+"PO-Revision-Date: 2021-04-16 18:10\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -38,6 +38,9 @@ msgstr "גודל משטח הציור"
 
 msgid "Frame Size"
 msgstr "גודל פריים"
+
+msgid "Size"
+msgstr ""
 
 msgid "Width:"
 msgstr "רוחב:"
@@ -126,11 +129,20 @@ msgstr "מחק"
 msgid "Scale Image"
 msgstr "הגדל/ הקטן תמונה"
 
+msgid "Pixels"
+msgstr "פיקסלים"
+
+msgid "Percentage"
+msgstr ""
+
 msgid "Crop Image"
 msgstr "חתוך תמונה"
 
 msgid "Resize Canvas"
 msgstr "שנה את גודל משטח הציור"
+
+msgid "Centralize Image"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "סובב תמונה"
@@ -153,11 +165,29 @@ msgstr "העדפות"
 msgid "Tile Mode"
 msgstr "מצב אריח"
 
+msgid "Window Transparency"
+msgstr "שקיפות חלון"
+
+msgid "Panel Layout"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Widescreen"
+msgstr ""
+
+msgid "Tallscreen"
+msgstr ""
+
 msgid "Mirror View"
 msgstr ""
 
 msgid "Show Grid"
 msgstr "הצג רשת"
+
+msgid "Show Pixel Grid"
+msgstr ""
 
 msgid "Show Rulers"
 msgstr "הצג סרגלים"
@@ -198,7 +228,13 @@ msgstr ""
 msgid "Spritesheet (new tab)"
 msgstr ""
 
+msgid "Spritesheet (new layer)"
+msgstr ""
+
 msgid "New frame"
+msgstr ""
+
+msgid "Replace frame"
 msgstr ""
 
 msgid "New layer"
@@ -219,6 +255,15 @@ msgstr ""
 msgid "Vertical frames:"
 msgstr ""
 
+msgid "Start frame:"
+msgstr ""
+
+msgid "At frame:"
+msgstr ""
+
+msgid "At layer:"
+msgstr ""
+
 msgid "Brush type:"
 msgstr ""
 
@@ -229,7 +274,7 @@ msgid "Project brush"
 msgstr ""
 
 msgid "Random brush"
-msgstr ""
+msgstr "מברשת אקראית"
 
 msgid "Save Sprite as .pxo"
 msgstr ""
@@ -241,7 +286,7 @@ msgid "Export Sprite"
 msgstr ""
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "הקובץ קיים. להחליף?"
 
 msgid "File %s already exists. Overwrite?"
 msgstr ""
@@ -382,6 +427,9 @@ msgstr ""
 msgid "Backup"
 msgstr ""
 
+msgid "Performance"
+msgstr ""
+
 msgid "Indicators"
 msgstr ""
 
@@ -416,6 +464,9 @@ msgid "System Language"
 msgstr ""
 
 msgid "Display Scale"
+msgstr ""
+
+msgid "Dim interface on dialog popup"
 msgstr ""
 
 msgid "Dark"
@@ -547,10 +598,7 @@ msgstr ""
 msgid "Developed by Orama Interactive"
 msgstr ""
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr ""
-
-msgid "©2019-2020 by Orama Interactive and contributors"
+msgid "©2019-present by Orama Interactive and contributors"
 msgstr ""
 
 msgid "Website"
@@ -702,6 +750,11 @@ msgid "Zoom\n\n"
 "%s for right mouse button"
 msgstr ""
 
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -731,6 +784,26 @@ msgstr ""
 msgid "Lighten/Darken\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
+msgstr ""
+
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr ""
+
+msgid "Ellipse"
 msgstr ""
 
 msgid "Choose a color for the left tool"
@@ -803,28 +876,67 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-msgid "Grid width:"
+msgid "Rectangular grid width:"
 msgstr ""
 
-msgid "Sets how far apart are vertical lines of the grid"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
 msgstr ""
 
-msgid "Grid height:"
+msgid "Rectangular grid height:"
 msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the grid"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr ""
 
-msgid "Isometric cell size:"
+msgid "Isometric cell bounds width:"
 msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Grid offset x:"
+msgstr ""
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Grid offset y:"
+msgstr ""
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
 
 msgid "Grid color:"
 msgstr ""
 
 msgid "A color of the grid"
+msgstr ""
+
+msgid "Pixel Grid"
+msgstr ""
+
+msgid "Show at zoom:"
+msgstr ""
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr ""
+
+msgid "Pixel grid color:"
+msgstr ""
+
+msgid "A color of the pixel grid"
 msgstr ""
 
 msgid "Transparency"
@@ -863,6 +975,18 @@ msgstr ""
 msgid "Only custom preset can be modified"
 msgstr ""
 
+msgid "Set application FPS limit:"
+msgstr ""
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr ""
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr ""
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
+
 msgid "Brush:"
 msgstr ""
 
@@ -894,6 +1018,12 @@ msgid "Pixel Perfect"
 msgstr ""
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
+msgstr ""
+
+msgid "Fill Shape"
+msgstr ""
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
 msgstr ""
 
 msgid "Brush color from"
@@ -1343,7 +1473,13 @@ msgstr ""
 msgid "A default background color of a new image"
 msgstr ""
 
-msgid "Lock aspect ratio:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr ""
+
+msgid "Landscape"
 msgstr ""
 
 msgid "Templates:"
@@ -1365,6 +1501,9 @@ msgid "Rectangular Selection"
 msgstr ""
 
 msgid "Zoom"
+msgstr ""
+
+msgid "Pan"
 msgstr ""
 
 msgid "Color Picker"
@@ -1489,5 +1628,41 @@ msgid "Tiled In X Axis"
 msgstr ""
 
 msgid "Tiled In Y Axis"
+msgstr ""
+
+msgid "Create a new palette"
+msgstr ""
+
+msgid "Create New Palette"
+msgstr ""
+
+msgid "Comment:"
+msgstr ""
+
+msgid "Empty"
+msgstr ""
+
+msgid "From Current Palette"
+msgstr ""
+
+msgid "From Current Sprite"
+msgstr ""
+
+msgid "From Current Selection"
+msgstr ""
+
+msgid "Add a new color"
+msgstr ""
+
+msgid "Remove a selected color"
+msgstr ""
+
+msgid "Palette with the same name and path already exists!"
+msgstr ""
+
+msgid "Palette name is required!"
+msgstr ""
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
 msgstr ""
 

@@ -115,7 +115,7 @@ text = "System Language"
 visible = false
 margin_top = 28.0
 margin_right = 498.0
-margin_bottom = 66.0
+margin_bottom = 110.0
 
 [node name="ShrinkContainer" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
 margin_right = 498.0
@@ -123,21 +123,21 @@ margin_bottom = 20.0
 
 [node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer"]
 margin_top = 3.0
-margin_right = 68.0
+margin_right = 84.0
 margin_bottom = 17.0
 text = "Display Scale"
 
 [node name="ShrinkLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer"]
-margin_left = 72.0
+margin_left = 88.0
 margin_top = 3.0
-margin_right = 122.0
+margin_right = 138.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 50, 0 )
 text = "1"
 align = 2
 
 [node name="ShrinkHSlider" type="HSlider" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/ShrinkContainer"]
-margin_left = 126.0
+margin_left = 142.0
 margin_right = 446.0
 margin_bottom = 16.0
 mouse_default_cursor_shape = 2
@@ -156,20 +156,40 @@ margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 text = "Apply"
 
-[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
-margin_right = 40.0
-margin_bottom = 4.0
-
-[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+[node name="DimPopup" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
 margin_top = 24.0
 margin_right = 498.0
-margin_bottom = 38.0
-text = "Themes"
+margin_bottom = 48.0
 
-[node name="Themes" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/DimPopup"]
+margin_top = 5.0
+margin_right = 207.0
+margin_bottom = 19.0
+text = "Dim interface on dialog popup"
+
+[node name="CheckBox" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/DimPopup"]
+margin_left = 211.0
+margin_right = 258.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+pressed = true
+text = "On"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
 margin_top = 52.0
 margin_right = 498.0
 margin_bottom = 56.0
+
+[node name="Label" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_top = 60.0
+margin_right = 498.0
+margin_bottom = 74.0
+text = "Themes"
+
+[node name="Themes" type="HBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface"]
+margin_top = 78.0
+margin_right = 498.0
+margin_bottom = 82.0
 script = ExtResource( 5 )
 
 [node name="ThemeButtons" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Interface/Themes"]
@@ -275,7 +295,7 @@ custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
 
-[node name="TypeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+[node name="GridTypeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_top = 3.0
 margin_right = 123.0
 margin_bottom = 17.0
@@ -296,73 +316,155 @@ text = "Rectangular"
 items = [ "Rectangular", null, false, 0, null, "Isometric", null, false, 1, null, "All", null, false, 2, null ]
 selected = 0
 
-[node name="WidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+[node name="GridWidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_left = 234.0
 margin_top = 3.0
 margin_right = 344.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 110, 0 )
-hint_tooltip = "Sets how far apart are vertical lines of the grid"
+hint_tooltip = "Sets how far apart are vertical lines of the rectangular grid"
 mouse_filter = 0
-text = "Grid width:"
+text = "Rectangular grid width:"
 
 [node name="GridWidthValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_top = 24.0
 margin_right = 123.0
 margin_bottom = 48.0
-hint_tooltip = "Sets how far apart are vertical lines of the grid"
+hint_tooltip = "Sets how far apart are vertical lines of the rectangular grid"
 mouse_default_cursor_shape = 2
 min_value = 1.0
 max_value = 16384.0
-value = 1.0
+value = 2.0
 rounded = true
 align = 2
 suffix = "px"
 
-[node name="Height" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+[node name="GridHeightLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_left = 127.0
 margin_top = 29.0
 margin_right = 230.0
 margin_bottom = 43.0
-hint_tooltip = "Sets how far apart are horizontal lines of the grid"
+hint_tooltip = "Sets how far apart are horizontal lines of the rectangular grid"
 mouse_filter = 0
-text = "Grid height:"
+text = "Rectangular grid height:"
 
 [node name="GridHeightValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_left = 234.0
 margin_top = 24.0
 margin_right = 344.0
 margin_bottom = 48.0
-hint_tooltip = "Sets how far apart are horizontal lines of the grid"
+hint_tooltip = "Sets how far apart are horizontal lines of the rectangular grid"
 mouse_default_cursor_shape = 2
 min_value = 1.0
-max_value = 16384.0
-value = 1.0
-rounded = true
-align = 2
-suffix = "px"
-
-[node name="IsometricCellSizeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_top = 57.0
-margin_right = 123.0
-margin_bottom = 71.0
-hint_tooltip = "Sets the size of the cells in an isometric grid"
-mouse_filter = 0
-text = "Isometric cell size:"
-
-[node name="IsometricCellSizeValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
-margin_left = 127.0
-margin_top = 52.0
-margin_right = 230.0
-margin_bottom = 76.0
-hint_tooltip = "Sets the size of the cells in an isometric grid"
-mouse_default_cursor_shape = 2
-min_value = 2.0
 max_value = 16384.0
 value = 2.0
 rounded = true
 align = 2
 suffix = "px"
+
+[node name="IsometricCellBoundsWidthLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_top = 57.0
+margin_right = 123.0
+margin_bottom = 71.0
+hint_tooltip = "Sets the width of the isometric cell's axis aligned bounding box"
+mouse_filter = 0
+text = "Isometric cell bounds width:"
+
+[node name="IsometricCellBoundsWidthValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_left = 127.0
+margin_top = 52.0
+margin_right = 230.0
+margin_bottom = 76.0
+hint_tooltip = "Sets the width of the isometric cell's axis aligned bounding box"
+mouse_default_cursor_shape = 2
+min_value = 2.0
+max_value = 16384.0
+value = 16.0
+rounded = true
+align = 2
+suffix = "px"
+
+[node name="IsometricCellBoundsHeightLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_top = 57.0
+margin_right = 123.0
+margin_bottom = 71.0
+hint_tooltip = "Sets the height of the isometric cell's axis aligned bounding box"
+mouse_filter = 0
+text = "Isometric cell bounds height:"
+
+[node name="IsometricCellBoundsHeightValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_left = 127.0
+margin_top = 52.0
+margin_right = 230.0
+margin_bottom = 76.0
+hint_tooltip = "Sets the height of the isometric cell's axis aligned bounding box"
+mouse_default_cursor_shape = 2
+min_value = 2.0
+max_value = 16384.0
+value = 8.0
+rounded = true
+align = 2
+suffix = "px"
+
+[node name="GridOffsetXLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_top = 57.0
+margin_right = 123.0
+margin_bottom = 71.0
+hint_tooltip = "Sets grid's x offset from the canvas origin (top left corner of the image)"
+mouse_filter = 0
+text = "Grid offset x:"
+
+[node name="GridOffsetXValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_left = 127.0
+margin_top = 52.0
+margin_right = 230.0
+margin_bottom = 76.0
+hint_tooltip = "Sets grid's x offset from the canvas origin (top left corner of the image)"
+mouse_default_cursor_shape = 2
+min_value = -16384.0
+max_value = 16384.0
+rounded = true
+align = 2
+suffix = "px"
+
+[node name="GridOffsetYLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_top = 57.0
+margin_right = 123.0
+margin_bottom = 71.0
+hint_tooltip = "Sets grid's y offset from the canvas origin (top left corner of the image)"
+mouse_filter = 0
+text = "Grid offset y:"
+
+[node name="GridOffsetYValue" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_left = 127.0
+margin_top = 52.0
+margin_right = 230.0
+margin_bottom = 76.0
+hint_tooltip = "Sets grid's y offset from the canvas origin (top left corner of the image)"
+mouse_default_cursor_shape = 2
+min_value = -16384.0
+max_value = 16384.0
+rounded = true
+align = 2
+suffix = "px"
+
+[node name="GridDrawOverTileModeLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_top = -99.0
+margin_right = 131.0
+margin_bottom = -85.0
+rect_min_size = Vector2( 110, 0 )
+hint_tooltip = "If disabled, the grid will be drawn only over the original image"
+mouse_filter = 0
+text = "Draw over Tile Mode:"
+
+[node name="GridDrawOverTileMode" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
+margin_left = 114.0
+margin_top = -104.0
+margin_right = 161.0
+margin_bottom = -80.0
+hint_tooltip = "If disabled, the grid will be drawn only over the original image"
+mouse_default_cursor_shape = 2
+text = "On"
 
 [node name="GridColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/GridOptions"]
 margin_left = 234.0
@@ -382,6 +484,67 @@ hint_tooltip = "A color of the grid"
 mouse_default_cursor_shape = 2
 
 [node name="HSeparator3" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 226.0
+margin_right = 498.0
+margin_bottom = 230.0
+
+[node name="PixelGridLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 234.0
+margin_right = 498.0
+margin_bottom = 248.0
+text = "Pixel Grid"
+
+[node name="PixelGridOptions" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
+margin_top = 122.0
+margin_right = 498.0
+margin_bottom = 222.0
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
+columns = 3
+
+[node name="ShowAtZoomLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
+margin_left = 234.0
+margin_top = 3.0
+margin_right = 344.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 110, 0 )
+hint_tooltip = "Sets the minimal zoom at which pixel grid will be shown"
+mouse_filter = 0
+text = "Show at zoom:"
+
+[node name="ShowAtZoom" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
+margin_top = 24.0
+margin_right = 123.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 80, 0 )
+hint_tooltip = "Sets the minimal zoom at which pixel grid will be shown"
+mouse_default_cursor_shape = 2
+min_value = 500.0
+max_value = 16384.0
+step = 100.0
+value = 1500.0
+rounded = true
+align = 2
+suffix = "%"
+
+[node name="GridColorLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
+margin_left = 234.0
+margin_top = 57.0
+margin_right = 344.0
+margin_bottom = 71.0
+hint_tooltip = "A color of the pixel grid"
+mouse_filter = 0
+text = "Pixel grid color:"
+
+[node name="GridColor" type="ColorPickerButton" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas/PixelGridOptions"]
+margin_top = 80.0
+margin_right = 123.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 64, 20 )
+hint_tooltip = "A color of the pixel grid"
+mouse_default_cursor_shape = 2
+
+[node name="HSeparator4" type="HSeparator" parent="HSplitContainer/ScrollContainer/VBoxContainer/Canvas"]
 margin_top = 226.0
 margin_right = 498.0
 margin_bottom = 230.0
@@ -714,6 +877,26 @@ margin_right = 505.0
 margin_bottom = 64.0
 size_flags_horizontal = 3
 
+[node name="PanLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_top = 47.0
+margin_right = 137.0
+margin_bottom = 61.0
+text = "Pan"
+
+[node name="left_pan_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 142.0
+margin_top = 44.0
+margin_right = 321.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+
+[node name="right_pan_tool" type="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
+margin_left = 326.0
+margin_top = 44.0
+margin_right = 505.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+
 [node name="ColorPickerLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Shortcuts/Shortcuts"]
 margin_top = 69.0
 margin_right = 137.0
@@ -883,6 +1066,61 @@ step = 0.25
 value = 1.0
 align = 2
 suffix = "minute(s)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Performance" type="VBoxContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer"]
+visible = false
+margin_top = 28.0
+margin_right = 498.0
+margin_bottom = 80.0
+
+[node name="PerformanceContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance"]
+margin_right = 498.0
+margin_bottom = 52.0
+columns = 3
+
+[node name="SetFPSLimitLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer"]
+margin_top = 5.0
+margin_right = 158.0
+margin_bottom = 19.0
+hint_tooltip = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+mouse_filter = 0
+size_flags_horizontal = 0
+text = "Set application FPS limit:"
+
+[node name="SetFPSLimit" type="SpinBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer"]
+margin_left = 162.0
+margin_right = 257.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 95, 0 )
+hint_tooltip = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+max_value = 144.0
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnableLimitFPSFocusLabel" type="Label" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer"]
+margin_left = 261.0
+margin_top = 5.0
+margin_right = 490.0
+margin_bottom = 19.0
+hint_tooltip = "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+mouse_filter = 0
+text = "Limit FPS to 1 when app loses focus"
+
+[node name="EnableLimitFPSFocus" type="CheckBox" parent="HSplitContainer/ScrollContainer/VBoxContainer/Performance/PerformanceContainer"]
+margin_top = 28.0
+margin_right = 158.0
+margin_bottom = 52.0
+hint_tooltip = "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+mouse_default_cursor_shape = 2
+pressed = true
+text = "On"
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2020-12-11 13:13\n"
+"PO-Revision-Date: 2021-04-16 20:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -39,6 +39,9 @@ msgstr "Размер холста"
 msgid "Frame Size"
 msgstr ""
 
+msgid "Size"
+msgstr "Размер"
+
 msgid "Width:"
 msgstr "Ширина:"
 
@@ -46,7 +49,7 @@ msgid "Height:"
 msgstr "Высота:"
 
 msgid "Center"
-msgstr ""
+msgstr "По центру"
 
 msgid "File"
 msgstr "Файл"
@@ -126,11 +129,20 @@ msgstr "Удалить"
 msgid "Scale Image"
 msgstr "Изменить размер изображения"
 
+msgid "Pixels"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
+
 msgid "Crop Image"
 msgstr "Обрезать изображение"
 
 msgid "Resize Canvas"
 msgstr "Изменить размер холста"
+
+msgid "Centralize Image"
+msgstr ""
 
 msgid "Rotate Image"
 msgstr "Повернуть изображение"
@@ -153,11 +165,29 @@ msgstr "Настройки"
 msgid "Tile Mode"
 msgstr "Бесшовный режим"
 
+msgid "Window Transparency"
+msgstr "Прозрачность окна"
+
+msgid "Panel Layout"
+msgstr "Расположение панелей"
+
+msgid "Auto"
+msgstr "Автоматически"
+
+msgid "Widescreen"
+msgstr "Широкий экран"
+
+msgid "Tallscreen"
+msgstr "Высокий экран"
+
 msgid "Mirror View"
-msgstr ""
+msgstr "Зеркальный вид"
 
 msgid "Show Grid"
 msgstr "Показывать сетку"
+
+msgid "Show Pixel Grid"
+msgstr "Показать пиксельную сетку"
 
 msgid "Show Rulers"
 msgstr "Показывать линейки"
@@ -196,10 +226,16 @@ msgid "New tab"
 msgstr "Новая вкладка"
 
 msgid "Spritesheet (new tab)"
+msgstr "Таблица спрайтов (новая вкладка)"
+
+msgid "Spritesheet (new layer)"
 msgstr ""
 
 msgid "New frame"
 msgstr "Новый кадр"
+
+msgid "Replace frame"
+msgstr "Заменить кадр"
 
 msgid "New layer"
 msgstr "Новый слой"
@@ -218,6 +254,15 @@ msgstr "Кадров по горизонтали:"
 
 msgid "Vertical frames:"
 msgstr "Кадров по вертикали:"
+
+msgid "Start frame:"
+msgstr "Начальный кадр:"
+
+msgid "At frame:"
+msgstr "В кадре:"
+
+msgid "At layer:"
+msgstr "На слое:"
 
 msgid "Brush type:"
 msgstr "Тип кисти:"
@@ -267,7 +312,7 @@ msgid "All Frames"
 msgstr "Все кадры"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Таблица спрайтов"
 
 msgid "Animation"
 msgstr "Анимация"
@@ -383,14 +428,17 @@ msgstr "Горячие клавишы"
 msgid "Backup"
 msgstr ""
 
+msgid "Performance"
+msgstr "Производительность"
+
 msgid "Indicators"
-msgstr ""
+msgstr "Индикатор"
 
 msgid "On"
 msgstr "Вкл"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Восстановить по умолчанию"
 
 msgid "Smooth Zoom"
 msgstr "Плавное масштабирование"
@@ -418,6 +466,9 @@ msgstr "Системный язык"
 
 msgid "Display Scale"
 msgstr "Масштаб экрана"
+
+msgid "Dim interface on dialog popup"
+msgstr "Затемнять интерфейс при появлении диалога"
 
 msgid "Dark"
 msgstr "Тёмная"
@@ -548,11 +599,8 @@ msgstr "Pixelorama - пикселизуйте свои мечты!"
 msgid "Developed by Orama Interactive"
 msgstr "Разработано Orama Interactive"
 
-msgid "Copyright 2019-2020 Orama Interactive and contributors"
-msgstr "Copyright 2019-2020 Orama Interactive и участники"
-
-msgid "©2019-2020 by Orama Interactive and contributors"
-msgstr "©2019-2020 Orama Interactive и участники"
+msgid "©2019-present by Orama Interactive and contributors"
+msgstr ""
 
 msgid "Website"
 msgstr "Сайт"
@@ -567,7 +615,7 @@ msgid "Developers"
 msgstr "Разработчики"
 
 msgid "Contributors"
-msgstr "Разработчики"
+msgstr "Участники"
 
 msgid "Donors"
 msgstr "Спонсоры"
@@ -642,7 +690,7 @@ msgid "Romanian"
 msgstr "Румынский"
 
 msgid "Japanese"
-msgstr ""
+msgstr "Японский"
 
 msgid "Development Team"
 msgstr "Команда разработчиков"
@@ -708,6 +756,11 @@ msgstr "Масштаб\n\n"
 "%s левой кнопкой мыши\n"
 "%s для правой кнопки мыши"
 
+msgid "Pan\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button"
+msgstr ""
+
 msgid "Color Picker\n"
 "Select a color from a pixel of the sprite\n\n"
 "%s for left mouse button\n"
@@ -751,6 +804,26 @@ msgid "Lighten/Darken\n\n"
 msgstr "Осветление/Затемнение\n\n"
 "%s для левой кнопки мыши\n"
 "%s для правой кнопки мыши"
+
+msgid "Rectangle Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Ellipse Tool\n\n"
+"%s for left mouse button\n"
+"%s for right mouse button\n\n"
+"Hold %s to create a 1:1 shape\n"
+"Hold %s to center the shape on the click origin\n"
+msgstr ""
+
+msgid "Rectangle"
+msgstr "Прямоугольник"
+
+msgid "Ellipse"
+msgstr "Эллипс"
 
 msgid "Choose a color for the left tool"
 msgstr "Выбор цвета для левого инструмента"
@@ -823,29 +896,68 @@ msgstr "Изометрическая"
 msgid "All"
 msgstr "Обе"
 
-msgid "Grid width:"
-msgstr "Ширина сетки:"
+msgid "Rectangular grid width:"
+msgstr ""
 
-msgid "Sets how far apart are vertical lines of the grid"
-msgstr "Устанавливает расстояние между вертикальными линиями сетки"
+msgid "Sets how far apart are vertical lines of the rectangular grid"
+msgstr ""
 
-msgid "Grid height:"
-msgstr "Высота сетки:"
+msgid "Rectangular grid height:"
+msgstr ""
 
-msgid "Sets how far apart are horizontal lines of the grid"
+msgid "Sets how far apart are horizontal lines of the rectangular grid"
 msgstr "Устанавливает расстояние между горизонтальными линиями сетки"
 
-msgid "Isometric cell size:"
-msgstr "Размер изометрических ячеек:"
+msgid "Isometric cell bounds width:"
+msgstr ""
 
-msgid "Sets the size of the cells in an isometric grid"
-msgstr "Задает размер ячеек в изометрической сетке"
+msgid "Sets the width of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Isometric cell bounds height:"
+msgstr ""
+
+msgid "Sets the height of the isometric cell's axis aligned bounding box"
+msgstr ""
+
+msgid "Grid offset x:"
+msgstr ""
+
+msgid "Sets grid's x offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Grid offset y:"
+msgstr ""
+
+msgid "Sets grid's y offset from the canvas origin (top left corner of the image)"
+msgstr ""
+
+msgid "Draw over Tile Mode:"
+msgstr ""
+
+msgid "If disabled, the grid will be drawn only over the original image"
+msgstr "Если отключено, сетка будет рисоваться только поверх исходного изображения"
 
 msgid "Grid color:"
 msgstr "Цвет сетки:"
 
 msgid "A color of the grid"
 msgstr "Цвет сетки"
+
+msgid "Pixel Grid"
+msgstr "Пиксельная сетка"
+
+msgid "Show at zoom:"
+msgstr "Показать при масштабе:"
+
+msgid "Sets the minimal zoom at which pixel grid will be shown"
+msgstr "Минимальный масштаб, при котором отображается пиксельная сетка"
+
+msgid "Pixel grid color:"
+msgstr "Цвет пиксельной сетки:"
+
+msgid "A color of the pixel grid"
+msgstr "Цвет пиксельной сетки"
 
 msgid "Transparency"
 msgstr "Прозрачность"
@@ -883,6 +995,18 @@ msgstr "Клеточки прозрачности следуют увеличе�
 msgid "Only custom preset can be modified"
 msgstr "Только пользовательские предустановки могут быть изменены"
 
+msgid "Set application FPS limit:"
+msgstr "Ограничение кадров в секунду:"
+
+msgid "Limit FPS to 1 when app loses focus"
+msgstr "Ограничить до 1 кадра в секунду, когда приложение в фоне"
+
+msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+msgstr ""
+
+msgid "If this is toggled on, when the application's window loses focus, the FPS limit of the application is set to 1. This helps lower CPU usage when idle. The FPS limit is being reset when the mouse enters the application's window."
+msgstr ""
+
 msgid "Brush:"
 msgstr "Кисть:"
 
@@ -896,7 +1020,7 @@ msgid "Circle brush"
 msgstr "Круглая кисть"
 
 msgid "Filled circle brush"
-msgstr ""
+msgstr "Заполненная круглая кисть"
 
 msgid "Custom brush"
 msgstr "Своя кисть"
@@ -914,7 +1038,13 @@ msgid "Pixel Perfect"
 msgstr "Пиксельная точность"
 
 msgid "Makes lines smooth by removing the extra pixels on the edges"
-msgstr ""
+msgstr "Делает линии плавными, удаляя лишние пиксели на краях"
+
+msgid "Fill Shape"
+msgstr "Заполнить фигуру"
+
+msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
+msgstr "Заполняет нарисованную фигуру цветом, вместо того, чтобы нарисовать пустую фигуру"
 
 msgid "Brush color from"
 msgstr "Цвет кисти из"
@@ -944,7 +1074,7 @@ msgid "Offset"
 msgstr "Смещение"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Простое затенение"
 
 msgid "Hue Shifting"
 msgstr ""
@@ -1157,7 +1287,7 @@ msgid "Opacity:"
 msgstr "Непрозрачность:"
 
 msgid "Tile mode opacity:"
-msgstr ""
+msgstr "Прозрачность режима тайла:"
 
 msgid "Toggle layer's visibility"
 msgstr "Переключить видимость слоя"
@@ -1326,10 +1456,10 @@ msgid "Create colors with alpha component"
 msgstr ""
 
 msgid "Get colors only from selection"
-msgstr ""
+msgstr "Получить цвета только из выделенного"
 
 msgid "Get colors from"
-msgstr ""
+msgstr "Получить цвета от"
 
 msgid "Patrons:"
 msgstr "Меценаты:"
@@ -1370,8 +1500,14 @@ msgstr "Цвет заливки по умолчанию:"
 msgid "A default background color of a new image"
 msgstr "Цвет фона по умолчанию для нового изображения"
 
-msgid "Lock aspect ratio:"
-msgstr "Фиксированные пропорции:"
+msgid "Lock aspect ratio"
+msgstr ""
+
+msgid "Portrait"
+msgstr "Портретная"
+
+msgid "Landscape"
+msgstr "Горизонтальное"
 
 msgid "Templates:"
 msgstr "Шаблоны:"
@@ -1393,6 +1529,9 @@ msgstr "Прямоугольное выделение"
 
 msgid "Zoom"
 msgstr "Масштаб"
+
+msgid "Pan"
+msgstr ""
 
 msgid "Color Picker"
 msgstr "Выбор цвета (пипетка)"
@@ -1518,4 +1657,40 @@ msgstr ""
 
 msgid "Tiled In Y Axis"
 msgstr ""
+
+msgid "Create a new palette"
+msgstr "Создать новую палитру"
+
+msgid "Create New Palette"
+msgstr "Создать новую палитру"
+
+msgid "Comment:"
+msgstr "Комментарий:"
+
+msgid "Empty"
+msgstr "Пустой"
+
+msgid "From Current Palette"
+msgstr "Из текущей палитры"
+
+msgid "From Current Sprite"
+msgstr "Из текущего спрайта"
+
+msgid "From Current Selection"
+msgstr "Из выделенного"
+
+msgid "Add a new color"
+msgstr "Добавить новый цвет"
+
+msgid "Remove a selected color"
+msgstr "Удалить выбранный цвет"
+
+msgid "Palette with the same name and path already exists!"
+msgstr "Палитра с таким названием по такому пути уже существует!"
+
+msgid "Palette name is required!"
+msgstr "Необходимо указать имя палитры!"
+
+msgid "Reducing palette size will reset positions of colors. Colors that don't fit in new palette size will be lost!"
+msgstr "Уменьшение размера палитры сбросит позиции цветов. Цвета, которые не поместятся в новую палитру, будут потеряны!"
 
